@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.praneethkollareddy.restaurantreservation">
 
+    <uses-permission android:name="android.permission.INTERNET" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -11,22 +12,22 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_main"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Main_Activity"
             android:label="@string/title_activity_main_"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:exported="true">
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
         <activity
-            android:name=".MakeReservation"
-            android:label="@string/title_activity_make_reservation"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:name=".AddRes"
+            android:label="@string/title_add_res"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

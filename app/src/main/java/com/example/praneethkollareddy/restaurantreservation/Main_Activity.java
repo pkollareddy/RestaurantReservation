@@ -13,9 +13,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListView;
 
 public class Main_Activity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    public  String[] itemname= {"Pf Changs","LB Steak","Fiorillo","Rosie McCains"};
+    public  Integer[] imgid= {R.drawable.res_pfchangs,R.drawable.res_lbsteak,R.drawable.res_fiorillo,R.drawable.res_rosiemccains};
+    public  String[] waittime= {"24","15","31","46"};
+    public  String[] dollorrange={"$$","$$$","$$","$$"};
+    public  String[] rating={"3","4","5","3"};
+
+    ListView res_list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,14 +33,19 @@ public class Main_Activity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent makeRes = new Intent(Main_Activity.this, MakeReservation.class);
-                startActivity(makeRes);
-            }
-        });
+//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
+//            }
+//        });
+
+        res_list = (ListView) findViewById(R.id.res_list);
+        ResListAdapter adapter = new ResListAdapter(this, itemname,imgid, waittime, dollorrange,rating);
+        res_list.setAdapter(adapter);
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -72,7 +86,13 @@ public class Main_Activity extends AppCompatActivity
             return true;
         }
 
-        return super.onOptionsItemSelected(item);
+        if (id == R.id.add_res) {
+            Intent in = new Intent(getApplicationContext(), AddRes.class);
+            startActivity(in);
+            return true;
+        }
+
+            return super.onOptionsItemSelected(item);
     }
 
     @SuppressWarnings("StatementWithEmptyBody")

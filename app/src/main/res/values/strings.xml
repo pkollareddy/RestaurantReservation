@@ -3,10 +3,11 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="title_activity_main_">ReRe</string>
+    <string name="title_add_res">Add New Restaurant</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="title_activity_make_reservation">MakeReservation</string>
+    <string name="large_text">Large text</string>
 
 
 </resources>

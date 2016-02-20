@@ -54,6 +54,15 @@ public class Main_Activity extends AppCompatActivity
 //        });
 
         res_list = (ListView) findViewById(R.id.res_list);
+
+        res_list.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent in = new Intent(getApplicationContext(),ActResDetails.class);
+                startActivity(in);
+
+            }
+        });
         ResListAdapter adapter = new ResListAdapter(this, itemname,imgid, waittime, dollorrange,rating);
         res_list.setAdapter(adapter);
 

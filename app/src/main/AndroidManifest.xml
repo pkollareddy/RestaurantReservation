@@ -28,6 +28,11 @@
             android:name=".AddRes"
             android:label="@string/title_add_res"
             android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name=".ActResDetails"
+            android:label="@string/title_add_res"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

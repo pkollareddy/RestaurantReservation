@@ -13,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.firebase.client.DataSnapshot;
@@ -55,32 +56,32 @@ public class Main_Activity extends AppCompatActivity
 
         res_list = (ListView) findViewById(R.id.res_list);
 
-        res_list.setOnClickListener(new View.OnClickListener() {
+        res_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent in = new Intent(getApplicationContext(),ActResDetails.class);
                 startActivity(in);
-
             }
         });
+
         ResListAdapter adapter = new ResListAdapter(this, itemname,imgid, waittime, dollorrange,rating);
         res_list.setAdapter(adapter);
 
 
-        myFirebaseRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot snapshot) {
-                for (DataSnapshot postSnapshot : snapshot.getChildren()) {
-                    ResData post = postSnapshot.getValue(ResData.class);
-                   // System.out.println(post.getAuthor() + " - " + post.getTitle());
-                }
-            }
-
-            @Override
-            public void onCancelled(FirebaseError firebaseError) {
-                System.out.println("The read failed: " + firebaseError.getMessage());
-            }
-        });
+//        myFirebaseRef.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot snapshot) {
+//                for (DataSnapshot postSnapshot : snapshot.getChildren()) {
+//                    ResData post = postSnapshot.getValue(ResData.class);
+//                   // System.out.println(post.getAuthor() + " - " + post.getTitle());
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(FirebaseError firebaseError) {
+//                System.out.println("The read failed: " + firebaseError.getMessage());
+//            }
+//        });
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

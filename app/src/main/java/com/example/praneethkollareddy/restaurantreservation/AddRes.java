@@ -56,6 +56,7 @@ public class AddRes extends AppCompatActivity {
                 myFirebaseRef.child(name.getText().toString() + "/rating").setValue(radio_rating);
                 myFirebaseRef.child(name.getText().toString() + "/cuisine").setValue(cuisine.getText().toString());
                 myFirebaseRef.child(name.getText().toString() + "/dollar_range").setValue(radio_dollar_range);
+                finish();
 
 
 

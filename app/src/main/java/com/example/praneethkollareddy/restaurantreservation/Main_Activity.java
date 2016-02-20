@@ -15,6 +15,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
 
+import com.firebase.client.DataSnapshot;
+import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
+import com.firebase.client.ValueEventListener;
+
 public class Main_Activity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -24,7 +29,9 @@ public class Main_Activity extends AppCompatActivity
     public  String[] dollorrange={"$$","$$$","$$","$$"};
     public  String[] rating={"3","4","5","3"};
 
+
     ListView res_list;
+    Firebase myFirebaseRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +39,10 @@ public class Main_Activity extends AppCompatActivity
         setContentView(R.layout.activity_main_);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        Firebase.setAndroidContext(this);
+        myFirebaseRef = new Firebase("https://resplendent-heat-2353.firebaseio.com/Restaurants");
+
 
 //        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 //        fab.setOnClickListener(new View.OnClickListener() {
@@ -45,6 +56,22 @@ public class Main_Activity extends AppCompatActivity
         res_list = (ListView) findViewById(R.id.res_list);
         ResListAdapter adapter = new ResListAdapter(this, itemname,imgid, waittime, dollorrange,rating);
         res_list.setAdapter(adapter);
+
+
+        myFirebaseRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                for (DataSnapshot postSnapshot : snapshot.getChildren()) {
+                    ResData post = postSnapshot.getValue(ResData.class);
+                   // System.out.println(post.getAuthor() + " - " + post.getTitle());
+                }
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+                System.out.println("The read failed: " + firebaseError.getMessage());
+            }
+        });
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

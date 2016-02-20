@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="5dp">
+
+    <ImageView
+        android:id="@+id/img_res"
+        android:layout_width="80dp"
+        android:layout_height="match_parent"
+        android:padding="5dp"
+        android:layout_gravity="left"
+        android:scaleType="fitXY"/>
+
+    <LinearLayout android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="5dp">
+
+        <TextView
+                android:id="@+id/text_res_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Medium Text"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="15dp"/>
+
+        <RatingBar
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:numStars="5"
+                    android:stepSize="1"
+                    android:rating="4"
+                    style="?android:attr/ratingBarStyleSmall"
+
+            android:id="@+id/res_rating" />
+
+        <TextView
+            android:id="@+id/text_res_cuisine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:textSize="12dp"
+            android:layout_marginTop="10dp"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_weight="1"
+        android:gravity="right"
+        android:paddingRight="5dp"
+        android:paddingTop="5dp">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:text="$$$"
+        android:textColor="@color/colorPrimary"
+        android:paddingRight="13dp"
+        android:id="@+id/text_dollar_range" />
+    <Button
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:text="26"
+        android:textSize="13dp"
+        android:scaleType="fitXY"
+        android:background="@drawable/wait_green"
+        android:stateListAnimator="@null"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:id="@+id/btn_wait_time" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2.0 mi, 4 mins"
+        android:textSize="12dp"/>
+
+    </LinearLayout>
+
+</LinearLayout>

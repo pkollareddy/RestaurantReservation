@@ -18,9 +18,23 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.TimePicker;
 
+import com.firebase.client.Firebase;
+
 public class MakeReservation extends FragmentActivity implements TimePickerDialog.OnTimeSetListener, DatePickerDialog.OnDateSetListener {
+
+    Firebase myFirebaseRef;
+    String name;
+    String email;
+    String phone;
+    int party;
+    int year;
+    int month;
+    int day;
+    int hour;
+    int minute;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +63,27 @@ public class MakeReservation extends FragmentActivity implements TimePickerDialo
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                EditText nameField = (EditText) findViewById(R.id.enterName);
+                name = nameField.getText().toString();
+
+                EditText emailField = (EditText) findViewById(R.id.enterEmail);
+                email = emailField.getText().toString();
+
+                EditText phoneField = (EditText) findViewById(R.id.enterPhone);
+                phone = phoneField.getText().toString();
+
+                EditText partyField = (EditText) findViewById(R.id.enterParty);
+                party = Integer.parseInt(partyField.getText().toString());
+
+                if(name != null && email !=null && phone != null && party != 0) {
+                    Firebase.setAndroidContext(MakeReservation.this);
+                    myFirebaseRef = new Firebase("https://resplendent-heat-2353.firebaseio.com/Reservations");
+                    Firebase resRef = myFirebaseRef.child(name + "'s Reservation");
+                    Reservation myRes = new Reservation(name, email, phone, party, year, month, day, hour, minute);
+                    resRef.setValue(myRes);
+                }
+
+
                 int id = 12345;
                 Notification notification = new Notification.Builder(MakeReservation.this)
                         .setContentTitle("Restaurant Reservation")
@@ -79,12 +114,15 @@ public class MakeReservation extends FragmentActivity implements TimePickerDialo
 
     @Override
     public void onTimeSet(TimePicker view, int hour, int minutes) {
-        //do some stuff for example write on log and update TextField on activity
+        this.hour = hour;
+        this.minute = minutes;
     }
 
     @Override
     public void onDateSet(DatePicker view, int year, int month, int day) {
-        //do some stuff for example write on log and update TextField on activity
+        this.year = year;
+        this.month = month;
+        this.day = day;
     }
 
 }

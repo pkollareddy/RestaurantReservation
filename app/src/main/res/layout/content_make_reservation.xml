@@ -15,8 +15,8 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Text"
-        android:id="@+id/textView2"
+        android:text="@string/name_prompt"
+        android:id="@+id/namePrompt"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
@@ -26,16 +26,16 @@
         android:inputType="textPersonName"
         android:text="Name"
         android:ems="10"
-        android:id="@+id/editText"
-        android:layout_below="@+id/textView2"
+        android:id="@+id/enterName"
+        android:layout_below="@+id/namePrompt"
         android:layout_centerHorizontal="true" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Text"
-        android:id="@+id/textView3"
-        android:layout_below="@+id/editText"
+        android:text="@string/email_prompt"
+        android:id="@+id/emailPrompt"
+        android:layout_below="@+id/enterName"
         android:layout_centerHorizontal="true" />
 
     <EditText
@@ -43,33 +43,33 @@
         android:layout_height="wrap_content"
         android:inputType="textEmailAddress"
         android:ems="10"
-        android:id="@+id/editText2"
-        android:layout_below="@+id/textView3"
+        android:id="@+id/enterEmail"
+        android:layout_below="@+id/emailPrompt"
         android:layout_centerHorizontal="true" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Text"
-        android:id="@+id/textView4"
-        android:layout_below="@+id/editText2"
+        android:text="@string/phone_prompt"
+        android:id="@+id/phonePrompt"
+        android:layout_below="@+id/enterEmail"
         android:layout_centerHorizontal="true" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="textEmailAddress"
+        android:inputType="phone"
         android:ems="10"
-        android:id="@+id/editText3"
-        android:layout_below="@+id/textView4"
-        android:layout_alignEnd="@+id/editText2" />
+        android:id="@+id/enterPhone"
+        android:layout_below="@+id/phonePrompt"
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Text"
-        android:id="@+id/textView5"
-        android:layout_below="@+id/editText3"
+        android:text="@string/party_prompt"
+        android:id="@+id/partyPrompt"
+        android:layout_below="@+id/enterPhone"
         android:layout_centerHorizontal="true" />
 
     <EditText
@@ -77,30 +77,55 @@
         android:layout_height="wrap_content"
         android:inputType="number"
         android:ems="10"
-        android:id="@+id/editText4"
-        android:layout_below="@+id/textView5"
+        android:id="@+id/enterParty"
+        android:layout_below="@+id/partyPrompt"
         android:layout_centerHorizontal="true" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
+        android:text="@string/date_button"
         android:id="@+id/pickDate"
-        android:layout_below="@id/editText4"/>
+        android:layout_below="@id/enterParty"/>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
+        android:text="@string/time_button"
         android:id="@+id/pickTime"
         android:layout_below="@id/pickDate"/>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Save"
+        android:text="@string/save_button"
         android:id="@+id/saveButton"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/textView8"
+        android:layout_below="@+id/pickTime"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Button"
+        android:id="@+id/button"
+        android:layout_below="@+id/textView8"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editText"
+        android:layout_below="@+id/button"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

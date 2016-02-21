@@ -8,9 +8,28 @@
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="name_prompt">Enter your name</string>
+    <string name="email_prompt">Enter your email</string>
+    <string name="phone_prompt">Enter your phone number</string>
+    <string name="party_prompt">Enter your party size</string>
+    <string name="date_button">Reservation Date</string>
+    <string name="time_button">Reservation Time</string>
+    <string name="save_button">Make Reservation</string>
+    <string name="confirm_human">Click here to be sent a verification code</string>
+    <string name="enter_code">Enter the verification code here</string>
     <string name="large_text">This is a very good restaurant. This is a very good restaurant.This is a very good restaurant.
     This is a very good restaurant.This is a very good restaurant.This is a very good restaurant.This is a very good restaurant.
     This is a very good restaurant.This is a very good restaurant.This is a very good restaurant.This is a very good restaurant.</string>
+    <string name="large_text">Large text</string>
+    <string name="name_prompt">Enter your name</string>
+    <string name="email_prompt">Enter your email</string>
+    <string name="phone_prompt">Enter your phone number</string>
+    <string name="party_prompt">Enter your party size</string>
+    <string name="date_button">Reservation Date</string>
+    <string name="time_button">Reservation Time</string>
+    <string name="save_button">Make Reservation</string>
+    <string name="confirm_human">Click here to be sent a verification code</string>
+    <string name="enter_code">Enter the verification code here</string>
 
 
 </resources>

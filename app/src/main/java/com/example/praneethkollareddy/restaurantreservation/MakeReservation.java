@@ -126,6 +126,7 @@ public class MakeReservation extends FragmentActivity implements TimePickerDialo
 
 
                 int id = 12345;
+
                 Notification notification = new Notification.Builder(MakeReservation.this)
                         .setContentTitle("Restaurant Reservation")
                         .setContentText("Your reservation has been made.")

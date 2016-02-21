@@ -173,9 +173,13 @@ public class Main_Activity extends AppCompatActivity
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.nav_reservations) {
+            Intent in = new Intent(getApplicationContext(), ActMyReservations.class);
+            startActivity(in);
 
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.nav_settings) {
+
+
 
         } else if (id == R.id.nav_share) {
 

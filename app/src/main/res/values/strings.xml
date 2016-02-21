@@ -20,7 +20,7 @@
     <string name="large_text">This is a very good restaurant. This is a very good restaurant.This is a very good restaurant.
     This is a very good restaurant.This is a very good restaurant.This is a very good restaurant.This is a very good restaurant.
     This is a very good restaurant.This is a very good restaurant.This is a very good restaurant.This is a very good restaurant.</string>
-
+    <string name="title_activity_act_my_reservations">ActMyReservations</string>
 
 
 </resources>

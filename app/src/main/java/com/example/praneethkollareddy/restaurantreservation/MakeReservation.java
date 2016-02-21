@@ -1,5 +1,7 @@
 package com.example.praneethkollareddy.restaurantreservation;
 
+import android.Manifest;
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.DialogFragment;
 import android.app.FragmentManager;
@@ -9,9 +11,11 @@ import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -40,6 +44,38 @@ public class MakeReservation extends FragmentActivity implements TimePickerDialo
     int minute;
     String pushID;
     int code;
+    static final int REQUEST_SEND_SMS = 1;
+    private static String[] PERMISSIONS_STORAGE = {
+            Manifest.permission.SEND_SMS
+    };
+
+    public static void verifyStoragePermissions(Activity activity) {
+        int permission = ActivityCompat.checkSelfPermission(activity, Manifest.permission.SEND_SMS);
+
+        if (permission != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(
+                    activity,
+                    PERMISSIONS_STORAGE,
+                    REQUEST_SEND_SMS
+            );
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case REQUEST_SEND_SMS: {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    SmsManager smsManager = SmsManager.getDefault();
+                    smsManager.sendTextMessage(phone, null, String.valueOf(code), null, null);
+                } else {
+                    System.out.println("Texts can't be sent.");
+                }
+                return;
+            }
+        }
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,8 +124,9 @@ public class MakeReservation extends FragmentActivity implements TimePickerDialo
                     }else if(party > 10) {
                         Toast.makeText(getApplicationContext(), "We can not take reservations for over 10 people. Please call the restaurant.", Toast.LENGTH_LONG).show();
                     } else {
+                        verifyStoragePermissions(MakeReservation.this);
                         SmsManager smsManager = SmsManager.getDefault();
-                        code = (int)(Math.random()*1001) + 1;
+                        code = (int)(Math.random()*100001) + 1;
                         System.out.println("This is the verification code: " + code);
                         smsManager.sendTextMessage(phone, null, String.valueOf(code), null, null);
                         Toast.makeText(getApplicationContext(), "Verification code has been sent.", Toast.LENGTH_SHORT).show();

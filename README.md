@@ -9,3 +9,9 @@
 8. Verifying adds reservation to Firebase and shows user a notification
 9. Firebase push() is used to generate unique keys for each restaurant/reservation
 10. Push objects to Firebase to automatically store a class of data
+
+
+Sources:
+http://stackoverflow.com/
+http://developer.android.com/
+https://www.firebase.com/docs/

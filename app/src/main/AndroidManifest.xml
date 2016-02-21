@@ -20,13 +20,11 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity
             android:name=".AddRes"
             android:label="@string/title_add_res"
             android:theme="@style/AppTheme.NoActionBar" />
-
         <activity
             android:name=".ActResDetails"
             android:label="@string/title_add_res_details"
@@ -35,6 +33,10 @@
             android:name=".MakeReservation"
             android:label="@string/title_add_res"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ActMyReservations"
+            android:label="@string/title_activity_act_my_reservations"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

@@ -37,10 +37,8 @@ public class AddRes extends AppCompatActivity {
 
         Firebase.setAndroidContext(this);
 
-        name = (EditText)findViewById(R.id.editText_name);
+        name = (EditText) findViewById(R.id.editText_name);
         address = (EditText)findViewById(R.id.editText_add);
-        rg_rating = (RadioGroup)findViewById(R.id.rg_rating);
-        rg_dollar_range = (RadioGroup)findViewById(R.id.rg_dollar_range);
         cuisine = (EditText)findViewById(R.id.editText_cuisine);
         waittime = (EditText)findViewById(R.id.editText_waittime);
         Button btn_add = (Button) findViewById(R.id.button_add);

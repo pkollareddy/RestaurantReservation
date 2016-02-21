@@ -13,6 +13,9 @@ import android.widget.RadioGroup;
 
 import com.firebase.client.Firebase;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class AddRes extends AppCompatActivity {
 
     Firebase myFirebaseRef;
@@ -50,17 +53,16 @@ public class AddRes extends AppCompatActivity {
                 radio_rating = ((RadioButton) findViewById(rg_rating.getCheckedRadioButtonId())).getText().toString();
                 radio_dollar_range = ((RadioButton) findViewById(rg_dollar_range.getCheckedRadioButtonId())).getText().toString();
 
-                myFirebaseRef.child(name.getText().toString()).setValue(name.getText().toString());
-                myFirebaseRef.child(name.getText().toString() + "/address").setValue(address.getText().toString());
-                myFirebaseRef.child(name.getText().toString() + "/waitime").setValue(waittime.getText().toString());
-                myFirebaseRef.child(name.getText().toString() + "/rating").setValue(radio_rating);
-                myFirebaseRef.child(name.getText().toString() + "/cuisine").setValue(cuisine.getText().toString());
-                myFirebaseRef.child(name.getText().toString() + "/dollar_range").setValue(radio_dollar_range);
+                Map<String, String> post1 = new HashMap<String, String>();
+                post1.put("name", name.getText().toString());
+                post1.put("address", address.getText().toString());
+                post1.put("cuisine", cuisine.getText().toString());
+                post1.put("dollar_range", radio_dollar_range);
+                post1.put("waittime", waittime.getText().toString());
+                post1.put("rating", radio_rating);
 
-
-
-                // myFirebaseRef.child("Restaurans/name").setValue(name.getText());
-
+                myFirebaseRef.push().setValue(post1);
+                finish();
 
 
             }

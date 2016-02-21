@@ -11,17 +11,87 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/text_margin"
-        android:text="@string/large_text" />
+        android:orientation="vertical"
+        android:gravity="center">
+
+
+        <ImageView
+            android:id="@+id/img_res"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:padding="5dp"
+            android:layout_gravity="center"
+            android:scaleType="fitXY"
+            android:src="@drawable/res_icon"/>
+
+
+            <TextView
+                android:id="@+id/text_RDaddress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Medium Text"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="15dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2.0 mi, 4 mins"
+            android:textSize="12dp"/>
+
+            <RatingBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:numStars="5"
+                android:stepSize="1"
+                android:rating="4"
+                style="?android:attr/ratingBarStyleSmall"
+
+                android:id="@+id/ratingbar_RD" />
+
+            <TextView
+                android:id="@+id/text_RDcuisine"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                android:textSize="12dp"
+                android:layout_marginTop="10dp"
+                />
+
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="$$$"
+                android:textColor="@color/colorPrimary"
+                android:id="@+id/text_RDdollarrange" />
+            <Button
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:text="26"
+                android:textSize="13dp"
+                android:scaleType="fitXY"
+                android:background="@drawable/wait_green"
+                android:stateListAnimator="@null"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:id="@+id/btn_RDwaittime" />
+
+
+
+
+
 
     <Button
-        android:id="@+id/btn_reserve"
+        android:id="@+id/btn_RDreserve"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Reserve"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/text_margin"
+            android:text="@string/large_text" />
+
     </LinearLayout>
 </android.support.v4.widget.NestedScrollView>

@@ -31,7 +31,7 @@
 
         <activity
             android:name=".ActResDetails"
-            android:label="@string/title_add_res"
+            android:label="@string/title_add_res_details"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".MakeReservation"

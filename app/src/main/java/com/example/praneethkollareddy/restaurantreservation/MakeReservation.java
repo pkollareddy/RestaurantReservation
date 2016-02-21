@@ -78,7 +78,7 @@ public class MakeReservation extends FragmentActivity implements TimePickerDialo
                 if(name != null && email !=null && phone != null && party != 0) {
                     Firebase.setAndroidContext(MakeReservation.this);
                     myFirebaseRef = new Firebase("https://resplendent-heat-2353.firebaseio.com/Reservations");
-                    Firebase resRef = myFirebaseRef.child(name + "'s Reservation");
+                    Firebase resRef = myFirebaseRef.push();
                     Reservation myRes = new Reservation(name, email, phone, party, year, month, day, hour, minute);
                     resRef.setValue(myRes);
                 }

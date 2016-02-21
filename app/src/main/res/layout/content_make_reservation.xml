@@ -16,6 +16,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/name_prompt"
+        android:textSize="16sp"
         android:id="@+id/namePrompt"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
@@ -24,7 +25,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:text="Name"
         android:ems="10"
         android:id="@+id/enterName"
         android:layout_below="@+id/namePrompt"
@@ -33,6 +33,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="16sp"
         android:text="@string/email_prompt"
         android:id="@+id/emailPrompt"
         android:layout_below="@+id/enterName"
@@ -50,6 +51,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="16sp"
         android:text="@string/phone_prompt"
         android:id="@+id/phonePrompt"
         android:layout_below="@+id/enterEmail"
@@ -67,6 +69,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="16sp"
         android:text="@string/party_prompt"
         android:id="@+id/partyPrompt"
         android:layout_below="@+id/enterPhone"
@@ -76,7 +79,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="number"
-        android:ems="10"
+        android:ems="3"
         android:id="@+id/enterParty"
         android:layout_below="@+id/partyPrompt"
         android:layout_centerHorizontal="true" />
@@ -101,31 +104,38 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/save_button"
+        android:enabled="false"
         android:id="@+id/saveButton"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New Text"
-        android:id="@+id/textView8"
-        android:layout_below="@+id/pickTime"
-        android:layout_centerHorizontal="true" />
-
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Button"
-        android:id="@+id/button"
-        android:layout_below="@+id/textView8"
+        android:text="@string/confirm_human"
+        android:id="@+id/sendCode"
+        android:layout_below="@+id/pickTime"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:visibility="invisible"
+        android:text="@string/enter_code"
+        android:id="@+id/codePrompt"
+        android:layout_below="@+id/sendCode"
         android:layout_centerHorizontal="true" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/editText"
-        android:layout_below="@+id/button"
+        android:inputType="number"
+        android:visibility="invisible"
+        android:enabled="false"
+        android:ems="5"
+        android:id="@+id/enterCode"
+        android:layout_below="@+id/codePrompt"
         android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

@@ -11,7 +11,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.praneethkollareddy.restaurantreservation.R;
 import com.example.praneethkollareddy.restaurantreservation.ResData;
@@ -20,12 +19,8 @@ import com.firebase.client.Query;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import org.w3c.dom.Text;
-
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.InputStream;
+import java.sql.Time;
+import java.util.Date;
 
 
 /**
@@ -51,8 +46,54 @@ public class ResListAdapter extends ResListFirebase<ResData> {
         myLocation = Main_Activity.myLoc;
         float distance;
         int time;
+        String restime1,restime2,restime3;
+        Date now = new Date();
+        now.getTime();
+        int hrNow = now.getHours();
+        int minNow = now.getMinutes();
+        int hr1,hr2,hr3,min1,min2,min3,min;
+        hr1=hr2=hr3=min1=min2=min3=0;
+        min = minNow/15;
 
 
+        if ((hrNow>21)|| (hrNow<12))
+            hrNow=13;
+
+        switch (min){
+            case 0:
+                hr1 = hrNow;
+                hr2 = hrNow;
+                hr3 = hrNow+1;
+                min1 = 30;
+                min2= 45;
+                min3 =00;
+            case 1:
+                hr1 = hrNow;
+                hr2 = hrNow+1;
+                hr3 = hrNow+1;
+                min1 = 45;
+                min2= 00;
+                min3 =15;
+            case 2:
+                hr1 = hrNow+1;
+                hr2 = hrNow+1;
+                hr3 = hrNow+1;
+                min1 = 00;
+                min2= 15;
+                min3 =30;
+            case 3:
+                hr1 = hrNow+1;
+                hr2 = hrNow+1;
+                hr3 = hrNow+1;
+                min1 = 15;
+                min2= 30;
+                min3 =45;
+        }
+
+
+        restime1 = hr1 + ":" + min1;
+        restime2 = hr2 + ":" + min2;
+        restime3 = hr3 + ":" + min3;
 
 
         Double resLat = Double.valueOf(resData.getLatitude());
@@ -68,9 +109,6 @@ public class ResListAdapter extends ResListFirebase<ResData> {
 
         time = (int) (distance*1.2);
 
-
-
-
         // Map a Chat object to an entry in our listview
         String waittime = resData.getWaittime();
         String dollarrange = resData.getDollar_range();
@@ -81,9 +119,6 @@ public class ResListAdapter extends ResListFirebase<ResData> {
 
         byte[] decodedString = Base64.decode(image, Base64.DEFAULT);
         Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-        //image.setImageBitmap(decodedByte);
-
-
 
         TextView res_dis = (TextView) v.findViewById(R.id.textview_distance);
         TextView res_name = (TextView) v.findViewById(R.id.text_res_name);
@@ -92,6 +127,11 @@ public class ResListAdapter extends ResListFirebase<ResData> {
         Button btn_waittime = (Button) v.findViewById(R.id.btn_wait_time);
         RatingBar res_rating = (RatingBar)v.findViewById(R.id.res_rating);
         ImageView img_res = (ImageView) v.findViewById(R.id.img_res);
+        Button btn_restime1 = (Button) v.findViewById(R.id.res_time1);
+        Button btn_restime2 = (Button) v.findViewById(R.id.res_time2);
+        Button btn_restime3 = (Button) v.findViewById(R.id.res_time3);
+
+
 
         res_name.setText(name);
         res_cuisine.setText(cuisine);
@@ -99,7 +139,14 @@ public class ResListAdapter extends ResListFirebase<ResData> {
         btn_waittime.setText(waittime);
         res_rating.setRating(Float.parseFloat(rating));
         res_dis.setText(String.valueOf(distance) + " mi, " + time + " mins");
+        btn_restime1.setText(restime1);
+        btn_restime2.setText(restime2);
+        btn_restime3.setText(restime3);
 
+
+
+
+        //mark tags of each restaurant in the listview
         Main_Activity.googleMap.addMarker(new MarkerOptions().position(new LatLng(resLat, resLng)).title(name));
 
 

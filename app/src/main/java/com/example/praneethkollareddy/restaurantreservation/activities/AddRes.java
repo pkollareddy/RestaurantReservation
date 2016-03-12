@@ -6,6 +6,7 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Path;
 import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
@@ -32,6 +33,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -43,7 +45,7 @@ public class AddRes extends AppCompatActivity implements GoogleApiClient.Connect
     EditText name, waittime, cuisine, street, city, state, zipcode;
     RadioGroup rg_rating, rg_dollar_range;
     String radio_rating, radio_dollar_range;
-    TextView mLongitude, mLatitude;
+    TextView mLongitude, mLatitude,filename;
     Button btn_getLocation,btn_upload;
     public String Latitude, Longitude;
     String image;
@@ -84,6 +86,7 @@ public class AddRes extends AppCompatActivity implements GoogleApiClient.Connect
             state = (EditText) findViewById(R.id.editText_state);
             zipcode = (EditText) findViewById(R.id.editText_zipcode);
             btn_upload = (Button) findViewById(R.id.btn_upload);
+            filename = (TextView) findViewById(R.id.textview_filename);
 
 
 //initiate firebase url
@@ -182,6 +185,9 @@ public class AddRes extends AppCompatActivity implements GoogleApiClient.Connect
                         bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
                         byte[] byteArray = byteArrayOutputStream .toByteArray();
                         image = Base64.encodeToString(byteArray, Base64.DEFAULT);
+
+                        File f = new File(filePath);
+                        filename.setText(f.getName());
 
 
                     }

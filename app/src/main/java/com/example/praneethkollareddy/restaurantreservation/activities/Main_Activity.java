@@ -7,11 +7,8 @@ import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -37,23 +34,17 @@ import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
-import com.google.android.gms.maps.model.MarkerOptions;
 
 public class Main_Activity extends AppCompatActivity
         implements LocationListener, NavigationView.OnNavigationItemSelectedListener, OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
-    private static final int LOCATION_PERMISSION = 1;
     private GoogleApiClient mGoogleApiClient;
-    Location mLastLocation;
     public static String Latitude = "37", Longitude = "-121";
     public static Location myLoc = new Location(LocationManager.NETWORK_PROVIDER);
     public static GoogleMap googleMap;
@@ -61,9 +52,7 @@ public class Main_Activity extends AppCompatActivity
 
     ListView res_list;
     TextView res_name;
-    Firebase myFirebaseRef;
-    Firebase refRestaurants;
-    String selectedRes;
+    Firebase myFirebaseRef,refRestaurants;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +60,7 @@ public class Main_Activity extends AppCompatActivity
         setContentView(R.layout.activity_main_);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
 
         SupportMapFragment mapFragment =
                 (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
@@ -87,6 +77,7 @@ public class Main_Activity extends AppCompatActivity
             // for ActivityCompat#requestPermissions for more details.
             return;
         }
+
         googleMap.setMyLocationEnabled(true);
         LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
         Criteria criteria = new Criteria();
@@ -169,6 +160,10 @@ public class Main_Activity extends AppCompatActivity
 
             NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
             navigationView.setNavigationItemSelectedListener(this);
+
+        Toast.makeText(getApplicationContext(),"Finding you current location...", Toast.LENGTH_LONG).show();
+
+
         }
 
         @Override
@@ -287,7 +282,7 @@ public class Main_Activity extends AppCompatActivity
         double latitude = location.getLatitude();
         double longitude = location.getLongitude();
         LatLng latLng = new LatLng(latitude, longitude);
-        //googleMap.addMarker(new MarkerOptions().position(latLng));
+
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
         googleMap.animateCamera(CameraUpdateFactory.zoomTo(13));
         Latitude = String.valueOf(latitude);

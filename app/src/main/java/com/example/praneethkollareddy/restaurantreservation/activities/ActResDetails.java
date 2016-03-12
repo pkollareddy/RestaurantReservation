@@ -1,4 +1,4 @@
-package com.example.praneethkollareddy.restaurantreservation;
+package com.example.praneethkollareddy.restaurantreservation.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.RatingBar;
 import android.widget.TextView;
+
+import com.example.praneethkollareddy.restaurantreservation.R;
 
 public class ActResDetails extends AppCompatActivity {
 

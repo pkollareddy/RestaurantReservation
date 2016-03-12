@@ -9,9 +9,15 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.example.praneethkollareddy.restaurantreservation.AddRes"
-    tools:showIn="@layout/activity_add_res">
+    tools:context=".activities.AddRes"
+    tools:showIn="@layout/activity_add_res"
+    android:descendantFocusability="beforeDescendants"
+    android:focusableInTouchMode="true"
+    >
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -23,7 +29,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="Name"
             android:id="@+id/textView2" />
 
@@ -36,19 +42,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Address"
-            android:id="@+id/textView3" />
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/editText_add" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="Rating"
             android:id="@+id/textView4" />
 
@@ -84,7 +78,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textAppearance="?android:attr/textAppearanceSmall"
             android:id="@+id/textView5"
             android:text="Wait Time" />
 
@@ -96,7 +90,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="Dollar Range"
             android:id="@+id/textView6" />
 
@@ -124,19 +118,102 @@
                 android:text="$$$$"/>
 
         </RadioGroup>
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="Cuisine"
-            android:id="@+id/textView7" />
+            android:id="@+id/textView8" />
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/editText_cuisine" />
 
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Street"
+            android:id="@+id/textView9" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/editText_street" />
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="City"
+                android:id="@+id/textView10" />
+            <EditText
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/editText_city" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="State"
+                android:id="@+id/textView11" />
+
+            <EditText
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/editText_state" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Zipcode"
+            android:id="@+id/textView12" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/editText_zipcode" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_getLocation"
+            android:text="Get Location"
+            android:layout_gravity="center_horizontal"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Your Long:"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="longitude"
+                android:id="@+id/textview_longitude"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" Your Lat:"/>
+                <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="latitude"
+                android:id="@+id/textview_latitude"/>
+            </LinearLayout>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -144,5 +221,8 @@
             android:id="@+id/button_add"
             android:layout_gravity="center_horizontal" />
 
+
+
     </LinearLayout>
+    </ScrollView>
 </RelativeLayout>

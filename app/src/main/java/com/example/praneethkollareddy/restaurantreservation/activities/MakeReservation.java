@@ -1,4 +1,4 @@
-package com.example.praneethkollareddy.restaurantreservation;
+package com.example.praneethkollareddy.restaurantreservation.activities;
 
 import android.Manifest;
 import android.app.Activity;
@@ -7,17 +7,12 @@ import android.app.DialogFragment;
 import android.app.FragmentManager;
 import android.app.Notification;
 import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.telephony.SmsManager;
 import android.view.View;
@@ -28,6 +23,10 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.example.praneethkollareddy.restaurantreservation.R;
+import com.example.praneethkollareddy.restaurantreservation.Reservation;
+import com.example.praneethkollareddy.restaurantreservation.ReservationDatePickerFragment;
+import com.example.praneethkollareddy.restaurantreservation.ReservationTimePickerFragment;
 import com.firebase.client.Firebase;
 
 public class MakeReservation extends FragmentActivity implements TimePickerDialog.OnTimeSetListener, DatePickerDialog.OnDateSetListener {

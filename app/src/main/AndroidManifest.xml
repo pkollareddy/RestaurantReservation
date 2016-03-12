@@ -4,6 +4,11 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+
+
+
 
     <application
         android:allowBackup="true"
@@ -11,8 +16,15 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="AIzaSyDHdlaUvBnD3WLvpVc5CgpCoqt-fWZkH2I" />
+
+
+
         <activity
-            android:name=".Main_Activity"
+            android:name=".activities.Main_Activity"
             android:label="@string/title_activity_main_"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -22,19 +34,19 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".AddRes"
+            android:name=".activities.AddRes"
             android:label="@string/title_add_res"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".ActResDetails"
+            android:name=".activities.ActResDetails"
             android:label="@string/title_add_res_details"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".MakeReservation"
+            android:name=".activities.MakeReservation"
             android:label="@string/title_add_res"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".ActMyReservations"
+            android:name=".activities.ActMyReservations"
             android:label="@string/title_activity_act_my_reservations"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>

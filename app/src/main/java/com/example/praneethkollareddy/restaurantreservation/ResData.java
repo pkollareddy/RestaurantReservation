@@ -4,23 +4,16 @@ package com.example.praneethkollareddy.restaurantreservation;
  * Created by INSPIRON on 19-Feb-16.
  */
 public class ResData {
-    private String address;
-    private String cuisine;
-    private String dollar_range;
-    private String rating;
-    private String waittime;
-    private String name;
+    private String name,cuisine,dollar_range,rating,waittime,street,city,state, zipcode, latitude, longitude;
 
 public ResData(){
 
     }
 
+
     public String getName(){
         return name;
             }
-    public String getAddress(){
-        return address;
-    }
     public String getCuisine(){
         return cuisine;
     }
@@ -30,8 +23,28 @@ public ResData(){
     public String getRating(){
         return rating;
     }
+    public String getStreet(){
+        return street;
+    }
+    public String getCity(){
+        return city;
+    }
+    public String getState(){
+        return state;
+    }
+    public String getZipcode(){
+        return zipcode;
+    }
+    public String getLongitude(){
+        return longitude;
+    }
+    public String getLatitude(){
+        return latitude;
+    }
     public String getWaittime(){
         return waittime;
     }
+
+
 
 }

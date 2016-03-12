@@ -1,21 +1,18 @@
-package com.example.praneethkollareddy.restaurantreservation;
+package com.example.praneethkollareddy.restaurantreservation.adapters;
 
 import android.app.Activity;
-import android.content.Context;
-import android.media.Image;
-import android.view.LayoutInflater;
+import android.location.Location;
+import android.location.LocationManager;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.firebase.client.ChildEventListener;
-import com.firebase.client.DataSnapshot;
-import com.firebase.client.Firebase;
-import com.firebase.client.FirebaseError;
+import com.example.praneethkollareddy.restaurantreservation.R;
+import com.example.praneethkollareddy.restaurantreservation.ResData;
+import com.example.praneethkollareddy.restaurantreservation.activities.Main_Activity;
 import com.firebase.client.Query;
 
 import org.w3c.dom.Text;
@@ -27,6 +24,7 @@ import org.w3c.dom.Text;
 public class ResListAdapter extends ResListFirebase<ResData> {
 
     String res_key;
+    Location myLocation= new Location(LocationManager.NETWORK_PROVIDER), resLocation= new Location(LocationManager.NETWORK_PROVIDER);
 
     public ResListAdapter(Query ref, Activity activity, int layout) {
         super(ref, ResData.class, layout, activity);
@@ -38,6 +36,22 @@ public class ResListAdapter extends ResListFirebase<ResData> {
     @Override
     protected void populateView(View v, ResData resData) {
 
+        String myLat = Main_Activity.Latitude;
+        String myLong = Main_Activity.Longitude;
+        myLocation = Main_Activity.myLoc;
+
+
+        Double resLat = Double.valueOf(resData.getLatitude());
+        Double resLng = Double.valueOf((resData.getLongitude()));
+
+        resLocation.setLatitude(resLat);
+        resLocation.setLongitude(resLng);
+        float distance = myLocation.distanceTo(resLocation);
+        distance=distance/1000;
+
+        distance= (float) ((double)Math.round(distance * 10d) / 10d);
+
+
         // Map a Chat object to an entry in our listview
         String waittime = resData.getWaittime();
         String dollarrange = resData.getDollar_range();
@@ -46,6 +60,7 @@ public class ResListAdapter extends ResListFirebase<ResData> {
         String name = resData.getName();
 
 
+        TextView res_dis = (TextView) v.findViewById(R.id.textview_distance);
         TextView res_name = (TextView) v.findViewById(R.id.text_res_name);
         TextView res_cuisine = (TextView) v.findViewById(R.id.text_res_cuisine);
         TextView res_dollarrange = (TextView) v.findViewById(R.id.text_dollar_range);
@@ -58,6 +73,7 @@ public class ResListAdapter extends ResListFirebase<ResData> {
         res_dollarrange.setText(dollarrange);
         btn_waittime.setText(waittime);
         res_rating.setRating(Float.parseFloat(rating));
+        res_dis.setText(String.valueOf(distance) + "Km");
 
         int wt =  Integer.parseInt(waittime);
         if(wt<=15)btn_waittime.setBackgroundResource(R.drawable.wait_green);

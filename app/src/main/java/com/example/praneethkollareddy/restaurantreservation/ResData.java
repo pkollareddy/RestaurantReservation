@@ -4,12 +4,15 @@ package com.example.praneethkollareddy.restaurantreservation;
  * Created by INSPIRON on 19-Feb-16.
  */
 public class ResData {
-    private String name,cuisine,dollar_range,rating,waittime,street,city,state, zipcode, latitude, longitude;
+    private String name,cuisine,dollar_range,rating,waittime,street,city,state, zipcode, latitude, longitude,image;
 
 public ResData(){
 
     }
 
+public String getImage(){
+    return image;
+}
 
     public String getName(){
         return name;

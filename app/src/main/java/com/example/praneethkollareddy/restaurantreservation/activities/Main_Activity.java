@@ -56,7 +56,7 @@ public class Main_Activity extends AppCompatActivity
     Location mLastLocation;
     public static String Latitude = "37", Longitude = "-121";
     public static Location myLoc = new Location(LocationManager.NETWORK_PROVIDER);
-    GoogleMap googleMap;
+    public static GoogleMap googleMap;
 
 
     ListView res_list;

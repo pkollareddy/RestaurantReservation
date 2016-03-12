@@ -1,8 +1,11 @@
 package com.example.praneethkollareddy.restaurantreservation.adapters;
 
 import android.app.Activity;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.location.Location;
 import android.location.LocationManager;
+import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -14,8 +17,15 @@ import com.example.praneethkollareddy.restaurantreservation.R;
 import com.example.praneethkollareddy.restaurantreservation.ResData;
 import com.example.praneethkollareddy.restaurantreservation.activities.Main_Activity;
 import com.firebase.client.Query;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import org.w3c.dom.Text;
+
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
 
 
 /**
@@ -39,6 +49,10 @@ public class ResListAdapter extends ResListFirebase<ResData> {
         String myLat = Main_Activity.Latitude;
         String myLong = Main_Activity.Longitude;
         myLocation = Main_Activity.myLoc;
+        float distance;
+        int time;
+
+
 
 
         Double resLat = Double.valueOf(resData.getLatitude());
@@ -46,10 +60,15 @@ public class ResListAdapter extends ResListFirebase<ResData> {
 
         resLocation.setLatitude(resLat);
         resLocation.setLongitude(resLng);
-        float distance = myLocation.distanceTo(resLocation);
+        distance = myLocation.distanceTo(resLocation);
         distance=distance/1000;
 
+        distance = (float) (distance/ 1.6);
         distance= (float) ((double)Math.round(distance * 10d) / 10d);
+
+        time = (int) (distance*1.2);
+
+
 
 
         // Map a Chat object to an entry in our listview
@@ -58,6 +77,12 @@ public class ResListAdapter extends ResListFirebase<ResData> {
         String rating = resData.getRating();
         String cuisine = resData.getCuisine();
         String name = resData.getName();
+        String image = resData.getImage();
+
+        byte[] decodedString = Base64.decode(image, Base64.DEFAULT);
+        Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+        //image.setImageBitmap(decodedByte);
+
 
 
         TextView res_dis = (TextView) v.findViewById(R.id.textview_distance);
@@ -73,7 +98,10 @@ public class ResListAdapter extends ResListFirebase<ResData> {
         res_dollarrange.setText(dollarrange);
         btn_waittime.setText(waittime);
         res_rating.setRating(Float.parseFloat(rating));
-        res_dis.setText(String.valueOf(distance) + "Km");
+        res_dis.setText(String.valueOf(distance) + " mi, " + time + " mins");
+
+        Main_Activity.googleMap.addMarker(new MarkerOptions().position(new LatLng(resLat, resLng)).title(name));
+
 
         int wt =  Integer.parseInt(waittime);
         if(wt<=15)btn_waittime.setBackgroundResource(R.drawable.wait_green);
@@ -81,7 +109,7 @@ public class ResListAdapter extends ResListFirebase<ResData> {
         if(wt>30 && wt<=45)btn_waittime.setBackgroundResource(R.drawable.wait_orange);
         if(wt>45)btn_waittime.setBackgroundResource(R.drawable.wait_red);
 
-        img_res.setBackgroundResource(R.drawable.res_icon);
+        img_res.setImageBitmap(decodedByte);
 
 
     }

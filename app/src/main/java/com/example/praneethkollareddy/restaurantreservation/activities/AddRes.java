@@ -1,14 +1,21 @@
 package com.example.praneethkollareddy.restaurantreservation.activities;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.location.Location;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -24,18 +31,22 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
 
+import java.io.ByteArrayOutputStream;
 import java.util.HashMap;
 import java.util.Map;
 
 public class AddRes extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
+
+    private static final int SELECT_PICTURE = 1;
 
     Firebase myFirebaseRef;
     EditText name, waittime, cuisine, street, city, state, zipcode;
     RadioGroup rg_rating, rg_dollar_range;
     String radio_rating, radio_dollar_range;
     TextView mLongitude, mLatitude;
-    Button btn_getLocation;
+    Button btn_getLocation,btn_upload;
     public String Latitude, Longitude;
+    String image;
 
     private static final int LOCATION_PERMISSION = 1;
     private GoogleApiClient mGoogleApiClient;
@@ -72,10 +83,7 @@ public class AddRes extends AppCompatActivity implements GoogleApiClient.Connect
             city = (EditText) findViewById(R.id.editText_city);
             state = (EditText) findViewById(R.id.editText_state);
             zipcode = (EditText) findViewById(R.id.editText_zipcode);
-
-
-            mLatitude.setText("lat");
-            mLongitude.setText("long");
+            btn_upload = (Button) findViewById(R.id.btn_upload);
 
 
 //initiate firebase url
@@ -87,24 +95,6 @@ public class AddRes extends AppCompatActivity implements GoogleApiClient.Connect
 
                     radio_rating = ((RadioButton) findViewById(rg_rating.getCheckedRadioButtonId())).getText().toString();
                     radio_dollar_range = ((RadioButton) findViewById(rg_dollar_range.getCheckedRadioButtonId())).getText().toString();
-
-                    StringBuilder sb = new StringBuilder();
-                    sb.append(street.getText());
-                    sb.append(" ");
-                    sb.append(city.getText());
-                    sb.append(" ");
-                    sb.append(state.getText());
-                    sb.append(" ");
-                    sb.append(zipcode.getText());
-                    String address = sb.toString();
-
-                    GeocodingLocation locationAddress = new GeocodingLocation();
-                    locationAddress.getAddressFromLocation(address,
-                            getApplicationContext(), new GeocoderHandler());
-
-
-                    Latitude = mLatitude.getText().toString();
-                    Longitude = mLongitude.getText().toString();
 
                     Map<String, String> post1 = new HashMap<String, String>();
                     post1.put("name", name.getText().toString());
@@ -118,6 +108,7 @@ public class AddRes extends AppCompatActivity implements GoogleApiClient.Connect
                     post1.put("rating", radio_rating);
                     post1.put("latitude",Latitude);
                     post1.put("longitude",Longitude);
+                    post1.put("image",image);
 
                     myFirebaseRef.push().setValue(post1);
                     finish();
@@ -128,7 +119,6 @@ public class AddRes extends AppCompatActivity implements GoogleApiClient.Connect
             btn_getLocation.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
 
                     StringBuilder sb = new StringBuilder();
                     sb.append(street.getText());
@@ -147,10 +137,19 @@ public class AddRes extends AppCompatActivity implements GoogleApiClient.Connect
 
                 }
 
-
-
             });
 
+
+            btn_upload.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent();
+
+                    intent.setType("image/*");
+                    intent.setAction(Intent.ACTION_GET_CONTENT);
+                    startActivityForResult(Intent.createChooser(intent,"Select Picture"), SELECT_PICTURE);
+                }
+            });
 //            FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 //            fab.setOnClickListener(new View.OnClickListener() {
 //                @Override
@@ -160,9 +159,37 @@ public class AddRes extends AppCompatActivity implements GoogleApiClient.Connect
 //                }
 //            });
         }
+
+
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent imageReturnedIntent) {
+        super.onActivityResult(requestCode, resultCode, imageReturnedIntent);
 
+        switch (requestCode) {
+            case SELECT_PICTURE:
+                if (resultCode == RESULT_OK) {
+                    Uri selectedImage = imageReturnedIntent.getData();
+                    String[] filePathColumn = {MediaStore.Images.Media.DATA};
+                    Cursor cursor = getContentResolver().query(selectedImage, filePathColumn, null, null, null);
+                    if (cursor.moveToFirst()) {
+                        int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+                        String filePath = cursor.getString(columnIndex);
+                        Bitmap bitmap = BitmapFactory.decodeFile(filePath);
+
+                        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+                        bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
+                        byte[] byteArray = byteArrayOutputStream .toByteArray();
+                        image = Base64.encodeToString(byteArray, Base64.DEFAULT);
+
+
+                    }
+                    cursor.close();
+                }
+                break;
+        }
+    }
 
     public class GeocoderHandler extends Handler {
         @Override

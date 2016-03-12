@@ -214,6 +214,20 @@
                 android:text="latitude"
                 android:id="@+id/textview_latitude"/>
             </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Upload main picture"/>
+        <Button
+            android:id="@+id/btn_upload"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Upload"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textview_filename"/>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

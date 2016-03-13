@@ -26,6 +26,7 @@
         android:gravity="center_horizontal">
 
         <Button
+
             android:layout_width="150dp"
             android:layout_height="40dp"
             android:text="Make Reservation"
@@ -35,7 +36,7 @@
             android:stateListAnimator="@null"
             android:focusable="false"
             android:focusableInTouchMode="false"
-            android:id="@+id/btn_make_res"
+            android:id="@+id/btn_makeReservation"
             android:layout_weight="0.15"
             android:textColor="@color/colorWhite"/>
         <Button
@@ -49,7 +50,7 @@
             android:stateListAnimator="@null"
             android:focusable="false"
             android:focusableInTouchMode="false"
-            android:id="@+id/btn_order_food"
+            android:id="@+id/btn_orderFood"
             android:layout_weight="0.15"
             android:textColor="@color/colorWhite"/>
 
@@ -105,7 +106,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:padding="5dp"
-                android:layout_gravity="center"
                 android:scaleType="fitXY"
                 android:src="@drawable/res_chinachina"/>
 
@@ -133,11 +133,289 @@
                 android:layout_width="match_parent"
                 android:layout_height="180dp"/>
 
-
-
         </LinearLayout>
 
 
+        //layout with the details
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/colorWhite"
+            android:layout_marginTop="2dp"
+            android:padding="15dp">
+
+            //layout row item1 - phone/////////////////////////////////////////////////////////////////////////
+            <LinearLayout
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                //Item1
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/icon"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginLeft="10dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Phone"
+                        android:textColor="@color/colorBlack"
+                        android:textStyle="bold"/>
+                    <TextView
+                        android:layout_marginLeft="5dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="654-854-9854"
+                        android:id="@+id/text_contact"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+
+
+            //layout row item1 - price/////////////////////////////////////////////////////////////////////////
+            <LinearLayout
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                //Item1
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/icon"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginLeft="10dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Price"
+                        android:textColor="@color/colorBlack"
+                        android:textStyle="bold"/>
+                    <TextView
+                        android:layout_marginLeft="5dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="$31 to $50"
+                        android:id="@+id/text_price"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+            //layout row item1 - cuisine/////////////////////////////////////////////////////////////////////////
+            <LinearLayout
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                //Item1
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/icon"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginLeft="10dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Cuisine"
+                        android:textColor="@color/colorBlack"
+                        android:textStyle="bold"/>
+                    <TextView
+                        android:layout_marginLeft="5dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="American"
+                        android:id="@+id/text_cuisine"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
+            //layout row item1 - Hours/////////////////////////////////////////////////////////////////////////
+            <LinearLayout
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                //Item1
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/icon"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginLeft="10dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Hours"
+                        android:textColor="@color/colorBlack"
+                        android:textStyle="bold"/>
+                    <TextView
+                        android:layout_marginLeft="5dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Dinner: Su-Th 5:00pm-10:00pm, Dinner: Su-Th 5:00pm-10:00pm"
+                        android:id="@+id/text_Hours"/>
+                </LinearLayout>
+            </LinearLayout>
+
+
+            //layout row item1 - Payment Options/////////////////////////////////////////////////////////////////////////
+            <LinearLayout
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                //Item1
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/icon"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginLeft="10dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Payment Options"
+                        android:textColor="@color/colorBlack"
+                        android:textStyle="bold"/>
+                    <TextView
+                        android:layout_marginLeft="5dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="AMEX, Discover, MasterCard, Visa"
+                        android:id="@+id/text_PaymentOptions"/>
+                </LinearLayout>
+            </LinearLayout>
+
+
+            //layout row item1 - Parking/////////////////////////////////////////////////////////////////////////
+            <LinearLayout
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                //Item1
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/icon"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginLeft="10dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Parking"
+                        android:textColor="@color/colorBlack"
+                        android:textStyle="bold"/>
+                    <TextView
+                        android:layout_marginLeft="5dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Complimentary valet parking for Citrus patrons. Free self-parking is also available."
+                        android:id="@+id/text_Parking"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            //layout row item1 - Dress Code/////////////////////////////////////////////////////////////////////////
+            <LinearLayout
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                //Item1
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/icon"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginLeft="10dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Dress Code"
+                        android:textColor="@color/colorBlack"
+                        android:textStyle="bold"/>
+                    <TextView
+                        android:layout_marginLeft="5dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Business Casual"
+                        android:id="@+id/text_DressCode"/>
+                </LinearLayout>
+            </LinearLayout>
+
+
+            //layout row item1 - Description/////////////////////////////////////////////////////////////////////////
+            <LinearLayout
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                //Item1
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/icon"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginLeft="10dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Description"
+                        android:textColor="@color/colorBlack"
+                        android:textStyle="bold"/>
+                    <TextView
+                        android:layout_marginLeft="5dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Enjoy fine dining in San Jose in a modern setting. Sheer curtains, Venetian plants, warm walls, and terracotta ceilings create an engaging and versatile environment -- perfect for your next romantic evening, group gathering, or business dinner. Our menu, consisting of classics with a creative twist, is sure to have something to please every palate.
+
+Hearty steaks, fresh seafood, and flavorful vegetarian plates are among our specialties. Dine in the open-air, European-style courtyard near the fountain for an especially memorable experience.
+
+*Citrus offers complimentary valet parking six days a week, Monday through Saturday. "
+                        android:id="@+id/text_Description"/>
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
 
             <TextView
                 android:id="@+id/text_RDaddress"

@@ -128,6 +128,8 @@ public class Main_Activity extends AppCompatActivity
                     //get value from snapshot
 
                     //get values from listview selected
+
+
                     String name = ((TextView) findViewById(R.id.text_res_name)).getText().toString();
                     String cuisine = ((TextView) findViewById(R.id.text_res_cuisine)).getText().toString();
                     String dollar_range = ((TextView) findViewById(R.id.text_dollar_range)).getText().toString();
@@ -142,7 +144,6 @@ public class Main_Activity extends AppCompatActivity
                     in.putExtra("res_dollar_range", dollar_range);
                     in.putExtra("res_rating", rting);
                     in.putExtra("res_waittime", waittime);
-
                     startActivity(in);
 
 

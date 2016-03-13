@@ -44,6 +44,7 @@ public class ResListAdapter extends ResListFirebase<ResData> {
         String myLat = Main_Activity.Latitude;
         String myLong = Main_Activity.Longitude;
         myLocation = Main_Activity.myLoc;
+        String key;
         float distance;
         int time;
         String restime1,restime2,restime3;

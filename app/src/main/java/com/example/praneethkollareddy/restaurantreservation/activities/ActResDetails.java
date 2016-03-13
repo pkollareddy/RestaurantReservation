@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.example.praneethkollareddy.restaurantreservation.ActOrder;
 import com.example.praneethkollareddy.restaurantreservation.R;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -24,6 +25,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 public class ActResDetails extends AppCompatActivity implements OnMapReadyCallback,GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
+    Button btn_reserve, btn_Order;
     Button btn_reserve,btn_makeReservation, btn_orderFood;
     String res_name, res_dollar_range, res_waittime, res_rating, res_cuisine;
     GoogleMap resmap;
@@ -71,26 +73,40 @@ public class ActResDetails extends AppCompatActivity implements OnMapReadyCallba
 
         setTitle(res_name);
 
-//        TextView text_resName = (TextView) findViewById(R.id.text_RDaddress);
-//        TextView text_resCuisine = (TextView) findViewById(R.id.text_RDcuisine);
-//        TextView text_resDollarRange = (TextView) findViewById(R.id.text_RDdollarrange);
-//        RatingBar ratingBar = (RatingBar) findViewById(R.id.ratingbar_RD);
-//        Button btn_waittime = (Button) findViewById(R.id.btn_RDwaittime);
-//
-//        text_resName.setText(res_name);
-//        text_resCuisine.setText(res_cuisine);
-//        text_resDollarRange.setText(res_dollar_range);
-//        ratingBar.setRating(Float.parseFloat(res_rating));
-//        btn_waittime.setText(res_waittime);
-        btn_makeReservation = (Button) findViewById(R.id.btn_makeReservation);
-        btn_orderFood = (Button) findViewById(R.id.btn_orderFood);
-        btn_makeReservation.setOnClickListener(new View.OnClickListener() {
+        TextView text_resName = (TextView) findViewById(R.id.text_RDaddress);
+        TextView text_resCuisine = (TextView) findViewById(R.id.text_RDcuisine);
+        TextView text_resDollarRange = (TextView) findViewById(R.id.text_RDdollarrange);
+        RatingBar ratingBar = (RatingBar) findViewById(R.id.ratingbar_RD);
+        Button btn_waittime = (Button) findViewById(R.id.btn_RDwaittime);
+
+        text_resName.setText(res_name);
+        text_resCuisine.setText(res_cuisine);
+        text_resDollarRange.setText(res_dollar_range);
+        ratingBar.setRating(Float.parseFloat(res_rating));
+        btn_waittime.setText(res_waittime);
+
+
+        btn_reserve = (Button) findViewById(R.id.btn_RDreserve);
+        btn_reserve.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 Intent in = new Intent(getApplicationContext(),MakeReservation.class);
+                Intent in = new Intent(getApplicationContext(), MakeReservation.class);
+                in.putExtra("res_name", res_name);
+                startActivity(in);
+
+            }
+        });
+
+        btn_Order = (Button) findViewById(R.id.btn_Order);
+        btn_Order.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent in = new Intent(getApplicationContext(),ActOrder.class);
                 in.putExtra("res_name",res_name);
                 startActivity(in);
+
             }
         });
 
@@ -109,6 +125,8 @@ public class ActResDetails extends AppCompatActivity implements OnMapReadyCallba
     public void onMapReady(GoogleMap googleMap) {
         resmap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(37.3, -121.9), 13));
         resmap.addMarker(new MarkerOptions().position(new LatLng(37.3, -121.9)).title("Restaurant"));
+
+
 
 
     }

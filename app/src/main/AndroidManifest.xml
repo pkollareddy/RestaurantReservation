@@ -38,7 +38,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activities.MakeReservation"
-            android:label="@string/title_add_res"
+            android:label="@string/title_make_reservation"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activities.ActMyReservations"

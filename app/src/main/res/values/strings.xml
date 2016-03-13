@@ -5,21 +5,21 @@
     <string name="title_activity_main_">ReRe</string>
     <string name="title_add_res">Add New Restaurant</string>
     <string name="title_add_res_details">Restaurant Name</string>
+    <string name="title_make_reservation">Make Reservation</string>
+
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="name_prompt">Enter your name</string>
-    <string name="email_prompt">Enter your email</string>
-    <string name="phone_prompt">Enter your phone number</string>
-    <string name="party_prompt">Enter your party size</string>
-    <string name="date_button">Reservation Date</string>
-    <string name="time_button">Reservation Time</string>
+    <string name="name_prompt">Name</string>
+    <string name="email_prompt">Email</string>
+    <string name="phone_prompt">Phone</string>
+    <string name="party_prompt">Table for</string>
+    <string name="date_button">Choose Date</string>
+    <string name="time_button">Select Time</string>
     <string name="save_button">Make Reservation</string>
-    <string name="confirm_human">Click here to be sent a verification code</string>
+    <string name="confirm_human">Click here to get a verification code</string>
     <string name="enter_code">Enter the verification code here</string>
-    <string name="large_text">This is a very good restaurant. This is a very good restaurant.This is a very good restaurant.
-    This is a very good restaurant.This is a very good restaurant.This is a very good restaurant.This is a very good restaurant.
-    This is a very good restaurant.This is a very good restaurant.This is a very good restaurant.This is a very good restaurant.</string>
+
     <string name="title_activity_act_my_reservations">ActMyReservations</string>
     <string name="title_activity_act_order">Menu</string>
     <string name="section_format">Hello World from section: %1$d</string>

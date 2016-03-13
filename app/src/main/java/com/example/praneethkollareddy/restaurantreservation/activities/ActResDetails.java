@@ -72,6 +72,7 @@ public class ActResDetails extends AppCompatActivity implements OnMapReadyCallba
         setTitle(res_name);
 
 
+
         btn_makeReservation = (Button) findViewById(R.id.btn_makeReservation);
         btn_makeReservation.setOnClickListener(new View.OnClickListener() {
             @Override

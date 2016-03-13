@@ -48,6 +48,7 @@ public class Main_Activity extends AppCompatActivity
     public static String Latitude = "37", Longitude = "-121";
     public static Location myLoc = new Location(LocationManager.NETWORK_PROVIDER);
     public static GoogleMap googleMap;
+    public static String rName,rRating,rCuisine,rDollarRange,rImage;
 
 
     ListView res_list;
@@ -130,19 +131,19 @@ public class Main_Activity extends AppCompatActivity
                     //get values from listview selected
 
 
-                    String name = ((TextView) findViewById(R.id.text_res_name)).getText().toString();
-                    String cuisine = ((TextView) findViewById(R.id.text_res_cuisine)).getText().toString();
-                    String dollar_range = ((TextView) findViewById(R.id.text_dollar_range)).getText().toString();
+                    rName = ((TextView) findViewById(R.id.text_res_name)).getText().toString();
+                    rCuisine = ((TextView) findViewById(R.id.text_res_cuisine)).getText().toString();
+                    rDollarRange = ((TextView) findViewById(R.id.text_dollar_range)).getText().toString();
                     RatingBar raiting = (RatingBar) findViewById(R.id.res_rating);
-                    String rting = String.valueOf(raiting.getRating());
+                    rRating = String.valueOf(raiting.getRating());
                     String waittime = ((Button) findViewById(R.id.btn_wait_time)).getText().toString();
 
                     //pass values through intent
                     Intent in = new Intent(getApplicationContext(), ActResDetails.class);
-                    in.putExtra("res_name", name);
-                    in.putExtra("res_cuisine", cuisine);
-                    in.putExtra("res_dollar_range", dollar_range);
-                    in.putExtra("res_rating", rting);
+                    in.putExtra("res_name", rName);
+                    in.putExtra("res_cuisine", rCuisine);
+                    in.putExtra("res_dollar_range", rDollarRange);
+                    in.putExtra("res_rating", rRating);
                     in.putExtra("res_waittime", waittime);
                     startActivity(in);
 

@@ -31,18 +31,10 @@ import com.firebase.client.Firebase;
 
 public class MakeReservation extends FragmentActivity implements TimePickerDialog.OnTimeSetListener, DatePickerDialog.OnDateSetListener {
 
+    TextView rdate,rtime;
     Firebase myFirebaseRef;
-    String name;
-    String email;
-    String phone;
-    int party;
-    int year;
-    int month;
-    int day;
-    int hour;
-    int minute;
-    String pushID;
-    int code;
+    String name,email,phone,pushID;
+    int party,year, month,day,hour,minute,code;
     static final int REQUEST_SEND_SMS = 1;
     private static String[] PERMISSIONS_STORAGE = {
             Manifest.permission.SEND_SMS
@@ -81,7 +73,22 @@ public class MakeReservation extends FragmentActivity implements TimePickerDialo
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_make_reservation);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
+        //setSupportActionBar(toolbar);
+
+
+        TextView rname = (TextView) findViewById(R.id.text_rname);
+        rdate = (TextView) findViewById(R.id.date);
+        rtime = (TextView) findViewById(R.id.time);
+
+
+
+
+        rname.setText(Main_Activity.rName);
+        setTitle("Make Reservation");
+
+
+
+
 
         Button pickTime = (Button) findViewById(R.id.pickTime);
         pickTime.setOnClickListener(new View.OnClickListener() {
@@ -150,7 +157,7 @@ public class MakeReservation extends FragmentActivity implements TimePickerDialo
             @Override
             public void onClick(View v) {
                 EditText enterCode = (EditText) findViewById(R.id.enterCode);
-                if(Integer.parseInt(enterCode.getText().toString()) == code) {
+                if (Integer.parseInt(enterCode.getText().toString()) == code) {
                     Firebase.setAndroidContext(MakeReservation.this);
                     myFirebaseRef = new Firebase("https://resplendent-heat-2353.firebaseio.com/Reservations");
                     Firebase resRef = myFirebaseRef.push();
@@ -194,6 +201,8 @@ public class MakeReservation extends FragmentActivity implements TimePickerDialo
     public void onTimeSet(TimePicker view, int hour, int minutes) {
         this.hour = hour;
         this.minute = minutes;
+        rtime.setText(hour +":"+ minutes);
+
     }
 
     @Override
@@ -201,6 +210,7 @@ public class MakeReservation extends FragmentActivity implements TimePickerDialo
         this.year = year;
         this.month = month;
         this.day = day;
+        rdate.setText(month +"-"+ day +"-"+ year);
     }
 
 }

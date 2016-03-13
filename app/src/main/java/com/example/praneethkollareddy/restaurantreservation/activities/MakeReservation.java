@@ -2,13 +2,16 @@ package com.example.praneethkollareddy.restaurantreservation.activities;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.AlarmManager;
 import android.app.DatePickerDialog;
 import android.app.DialogFragment;
 import android.app.FragmentManager;
 import android.app.Notification;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
@@ -27,7 +30,10 @@ import com.example.praneethkollareddy.restaurantreservation.R;
 import com.example.praneethkollareddy.restaurantreservation.Reservation;
 import com.example.praneethkollareddy.restaurantreservation.ReservationDatePickerFragment;
 import com.example.praneethkollareddy.restaurantreservation.ReservationTimePickerFragment;
+import com.example.praneethkollareddy.restaurantreservation.DelayedNotif;
 import com.firebase.client.Firebase;
+
+import java.util.Calendar;
 
 public class MakeReservation extends FragmentActivity implements TimePickerDialog.OnTimeSetListener, DatePickerDialog.OnDateSetListener {
 
@@ -179,6 +185,21 @@ public class MakeReservation extends FragmentActivity implements TimePickerDialo
                 NotificationManager notificationManager = (NotificationManager) getSystemService(
                         Context.NOTIFICATION_SERVICE);
                 notificationManager.notify(id, notification);
+
+                Intent myIntent = new Intent(MakeReservation.this , DelayedNotif.class);
+                AlarmManager alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
+                PendingIntent pendingIntent = PendingIntent.getBroadcast(MakeReservation.this, 0, myIntent, 0);
+
+                Calendar calendar = Calendar.getInstance();
+                calendar.set(Calendar.YEAR, year);
+                calendar.set(Calendar.MONTH, month);
+                calendar.set(Calendar.DAY_OF_MONTH, day);
+                calendar.set(Calendar.HOUR_OF_DAY, hour-2);
+                calendar.set(Calendar.MINUTE, minute);
+
+                System.out.println("sound the alarm");
+                alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
+                System.out.println("alarm sounded");
                 finish();
             }
         });

@@ -23,6 +23,7 @@
     <string name="title_activity_act_my_reservations">ActMyReservations</string>
     <string name="title_activity_act_order">Menu</string>
     <string name="section_format">Hello World from section: %1$d</string>
+    <string name="search_reservations">Find reservations with your phone number:</string>
 
     <string-array name="menuList">
         <item>Item A</item>

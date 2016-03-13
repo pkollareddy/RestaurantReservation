@@ -13,11 +13,37 @@
     tools:showIn="@layout/activity_act_my_reservations">
 
 
-    <ExpandableListView
+    <FrameLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/expandableListView"
         android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="91dp" />
+        android:layout_centerHorizontal="true"
+        android:id="@+id/searchFrame">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/search_reservations"
+            android:id="@+id/phoneSearchPrompt"
+            android:layout_gravity="left|top" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="phone"
+            android:ems="10"
+            android:id="@+id/phoneSearchEntry"
+            android:layout_gravity="right|top"
+            android:layout_margin="20dp"
+            android:textSize="20dp" />
+
+    </FrameLayout>
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/reservation_list"
+        android:layout_below="@+id/searchFrame"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>

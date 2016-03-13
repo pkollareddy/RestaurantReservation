@@ -23,7 +23,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 public class ActResDetails extends AppCompatActivity implements OnMapReadyCallback,GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
-    Button btn_makeReservation, btn_orderFood;
+    Button btn_reserve, btn_Order,btn_makeReservation, btn_orderFood;
     String res_name, res_dollar_range, res_waittime, res_rating, res_cuisine;
     GoogleMap resmap;
     private GoogleApiClient mGoogleApiClient;
@@ -51,12 +51,10 @@ public class ActResDetails extends AppCompatActivity implements OnMapReadyCallba
 
         resmap.getUiSettings().setScrollGesturesEnabled(false);
         resmap.getUiSettings().setZoomControlsEnabled(false);
-
-
         resmap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
             public void onMapClick(LatLng latLng) {
-                Intent in = new Intent(getApplicationContext(),MapsActivity.class);
+                Intent in = new Intent(getApplicationContext(),AddRes.class);
                 startActivity(in);
             }
         });
@@ -79,7 +77,7 @@ public class ActResDetails extends AppCompatActivity implements OnMapReadyCallba
             @Override
             public void onClick(View v) {
 
-                Intent in = new Intent(getApplicationContext(), MakeReservation.class);
+                Intent in = new Intent(getApplicationContext(),MakeReservation.class);
                 in.putExtra("res_name", res_name);
                 startActivity(in);
 

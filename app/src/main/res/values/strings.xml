@@ -32,6 +32,7 @@
         <item>Item E</item>
         <item>Item F</item>
     </string-array>
+    <string name="title_activity_maps">Map</string>
 
 
 </resources>

@@ -9,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.praneethkollareddy.restaurantreservation.MapsActivity;
 import com.example.praneethkollareddy.restaurantreservation.R;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -55,7 +56,7 @@ public class ActResDetails extends AppCompatActivity implements OnMapReadyCallba
         resmap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
             public void onMapClick(LatLng latLng) {
-                Intent in = new Intent(getApplicationContext(),AddRes.class);
+                Intent in = new Intent(getApplicationContext(),MapsActivity.class);
                 startActivity(in);
             }
         });

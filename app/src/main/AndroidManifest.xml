@@ -45,7 +45,7 @@
             android:label="@string/title_activity_act_my_reservations"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".ActOrder"
+            android:name=".activities.ActOrder"
             android:label="@string/title_activity_act_order"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>

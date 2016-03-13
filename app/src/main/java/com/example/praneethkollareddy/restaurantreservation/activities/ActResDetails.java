@@ -8,10 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
-import android.widget.RatingBar;
-import android.widget.TextView;
 
-import com.example.praneethkollareddy.restaurantreservation.ActOrder;
 import com.example.praneethkollareddy.restaurantreservation.R;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -53,6 +50,8 @@ public class ActResDetails extends AppCompatActivity implements OnMapReadyCallba
 
         resmap.getUiSettings().setScrollGesturesEnabled(false);
         resmap.getUiSettings().setZoomControlsEnabled(false);
+
+
         resmap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
             public void onMapClick(LatLng latLng) {

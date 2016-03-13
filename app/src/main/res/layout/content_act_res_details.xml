@@ -103,14 +103,44 @@
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="15dp"
                 android:paddingBottom="4dp"/>
+                <HorizontalScrollView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
-            <ImageView
-                android:id="@+id/img_res"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:padding="5dp"
-                android:scaleType="fitXY"
-                android:src="@drawable/res_chinachina"/>
+                <ImageView
+                    android:id="@+id/img_res"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:padding="5dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/res_fiorillo"/>
+                    <ImageView
+                        android:id="@+id/img_res1"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:padding="5dp"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/res_chinachina"/>
+                    <ImageView
+                    android:id="@+id/img_res2"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:padding="5dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/res_lbsteak"/>
+                    <ImageView
+                        android:id="@+id/img_res4"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:padding="5dp"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/res_pfchangs"/>
+                </LinearLayout>
+                </HorizontalScrollView>
 
         </LinearLayout>
 
@@ -397,7 +427,7 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
+                    android:orientation="vertical"
                     android:layout_marginLeft="10dp">
                     <TextView
                         android:layout_width="wrap_content"

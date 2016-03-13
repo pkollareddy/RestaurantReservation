@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.example.praneethkollareddy.restaurantreservation.ActOrder;
 import com.example.praneethkollareddy.restaurantreservation.R;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -24,7 +25,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 public class ActResDetails extends AppCompatActivity implements OnMapReadyCallback,GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
-    Button btn_reserve;
+    Button btn_reserve, btn_Order;
     String res_name, res_dollar_range, res_waittime, res_rating, res_cuisine;
     GoogleMap resmap;
     private GoogleApiClient mGoogleApiClient;
@@ -88,12 +89,24 @@ public class ActResDetails extends AppCompatActivity implements OnMapReadyCallba
         btn_reserve.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent in = new Intent(getApplicationContext(),MakeReservation.class);
+                Intent in = new Intent(getApplicationContext(), MakeReservation.class);
+                in.putExtra("res_name", res_name);
+                startActivity(in);
+
+            }
+        });
+
+        btn_Order = (Button) findViewById(R.id.btn_Order);
+        btn_Order.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent in = new Intent(getApplicationContext(),ActOrder.class);
                 in.putExtra("res_name",res_name);
                 startActivity(in);
 
             }
         });
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -78,11 +78,7 @@
                 android:text="Get 500 points"
                 android:textSize="15dp"
                 android:layout_marginLeft="20dp"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="10% off on next visit"
-                android:textColor="@color/colorAccent"
+        android:textColor="@color/colorAccent"
                 android:textSize="15dp"
                 android:layout_marginLeft="20dp"/>
 
@@ -206,6 +202,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Reserve"/>
+        <Button
+            android:id="@+id/btn_Order"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Order"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -21,6 +21,17 @@
     This is a very good restaurant.This is a very good restaurant.This is a very good restaurant.This is a very good restaurant.
     This is a very good restaurant.This is a very good restaurant.This is a very good restaurant.This is a very good restaurant.</string>
     <string name="title_activity_act_my_reservations">ActMyReservations</string>
+    <string name="title_activity_act_order">Menu</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+
+    <string-array name="menuList">
+        <item>Item A</item>
+        <item>Item B</item>
+        <item>Item C</item>
+        <item>Item D</item>
+        <item>Item E</item>
+        <item>Item F</item>
+    </string-array>
 
 
 </resources>

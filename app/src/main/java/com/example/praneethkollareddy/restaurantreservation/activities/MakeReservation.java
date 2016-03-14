@@ -14,14 +14,22 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.telephony.SmsManager;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -33,15 +41,23 @@ import com.example.praneethkollareddy.restaurantreservation.ReservationTimePicke
 import com.example.praneethkollareddy.restaurantreservation.DelayedNotif;
 import com.firebase.client.Firebase;
 
+import java.sql.Time;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
-public class MakeReservation extends FragmentActivity implements TimePickerDialog.OnTimeSetListener, DatePickerDialog.OnDateSetListener {
+public class MakeReservation extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, TimePickerDialog.OnTimeSetListener, DatePickerDialog.OnDateSetListener {
 
-    TextView rdate,rtime;
+    TextView rdate,rtime,wait_time, rname;
     Firebase myFirebaseRef;
     String name,email,phone,pushID;
     int party,year, month,day,hour,minute,code;
     static final int REQUEST_SEND_SMS = 1;
+    private CountDownTimer countDownTimer;
+    LinearLayout layout_timer;
+
     private static String[] PERMISSIONS_STORAGE = {
             Manifest.permission.SEND_SMS
     };
@@ -79,22 +95,60 @@ public class MakeReservation extends FragmentActivity implements TimePickerDialo
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_make_reservation);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        //setSupportActionBar(toolbar);
+        setSupportActionBar(toolbar);
 
-
-        TextView rname = (TextView) findViewById(R.id.text_rname);
+        //map elements
         rdate = (TextView) findViewById(R.id.date);
         rtime = (TextView) findViewById(R.id.time);
+        wait_time = (TextView) findViewById(R.id.text_timer);
+        rname = (TextView) findViewById(R.id.text_rname);
 
+        int timer=0;
 
+        Intent in = getIntent();
+        String res_name =  in.getStringExtra("res_name");
+        String res_time = in.getStringExtra("res_time");
 
+        DateFormat df = new SimpleDateFormat("MMM dd, yyyy");
+        String now = df.format(new Date());
 
-        rname.setText(Main_Activity.rName);
+        if(res_time!=null){
+            rdate.setText(now);
+            rtime.setText(res_time);
+            rname.setText(res_name);
+        }
+
+        final String waittime = in.getStringExtra("waittime");
+        if(waittime!=null) {
+            timer = Integer.parseInt(waittime);
+        }
+
+        layout_timer = (LinearLayout) findViewById(R.id.layout_timer);
+        layout_timer.setVisibility(View.GONE);
+
+        if(timer!=0) {
+
+            layout_timer.setVisibility(View.VISIBLE);
+            rname.setText(res_name);
+            long startTime = timer * 60 * 1000;
+            countDownTimer = new CountDownTimer(startTime, 1000) {
+                @Override
+                public void onTick(long millisUntilFinished) {
+                    wait_time.setText("" + String.format("%d:%d",
+                            TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished),
+                            TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) -
+                                    TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished))));
+                }
+
+                @Override
+                public void onFinish() {
+
+                    wait_time.setText("Book now!!");
+                }
+            }.start();
+        }
+
         setTitle("Make Reservation");
-
-
-
-
 
         Button pickTime = (Button) findViewById(R.id.pickTime);
         pickTime.setOnClickListener(new View.OnClickListener() {
@@ -173,7 +227,6 @@ public class MakeReservation extends FragmentActivity implements TimePickerDialo
                     Toast.makeText(getApplicationContext(), "Your reservation has been confirmed.", Toast.LENGTH_SHORT).show();
                 }
 
-
                 int id = 12345;
 
                 Notification notification = new Notification.Builder(MakeReservation.this)
@@ -204,7 +257,65 @@ public class MakeReservation extends FragmentActivity implements TimePickerDialo
             }
         });
 
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+
+
     }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+
+            return true;
+        }
+
+        if (id == R.id.add_res) {
+            Intent in = new Intent(getApplicationContext(), AddRes.class);
+            startActivity(in);
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    @SuppressWarnings("StatementWithEmptyBody")
+
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        // Handle navigation view item clicks here.
+        int id = item.getItemId();
+
+        if (id == R.id.nav_camera) {
+            // Handle the camera action
+        } else if (id == R.id.nav_gallery) {
+
+        } else if (id == R.id.nav_reservations) {
+            Intent in = new Intent(getApplicationContext(), ActMyReservations.class);
+            startActivity(in);
+
+        } else if (id == R.id.nav_settings) {
+
+
+        } else if (id == R.id.nav_share) {
+
+        } else if (id == R.id.nav_send) {
+
+        }
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
+    }
+
+
 
     public void showTimePickerDialog(View v) {
         FragmentManager fm = this.getFragmentManager();

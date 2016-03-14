@@ -27,12 +27,12 @@
 
         <Button
 
-            android:layout_width="150dp"
-            android:layout_height="40dp"
+            android:layout_width="130dp"
+            android:layout_height="35dp"
             android:text="Make Reservation"
-            android:textSize="13dp"
+            android:textSize="12dp"
             android:scaleType="fitXY"
-            android:background="@drawable/restime"
+            android:background="@color/colorMaroon"
             android:stateListAnimator="@null"
             android:focusable="false"
             android:focusableInTouchMode="false"
@@ -41,12 +41,12 @@
             android:textColor="@color/colorWhite"/>
         <Button
             android:layout_marginLeft="10dp"
-            android:layout_width="150dp"
-            android:layout_height="40dp"
+            android:layout_width="130dp"
+            android:layout_height="35dp"
             android:text="Order Food"
-            android:textSize="13dp"
+            android:textSize="12dp"
             android:scaleType="fitXY"
-            android:background="@drawable/restime"
+            android:background="@color/colorMaroon"
             android:stateListAnimator="@null"
             android:focusable="false"
             android:focusableInTouchMode="false"
@@ -78,14 +78,19 @@
                 android:textColor="@color/colorAccent"
                 android:text="Get 500 points"
                 android:textSize="15dp"
-                android:layout_marginLeft="20dp"/>
+                android:layout_marginLeft="20dp"
+                android:id="@+id/text_offer1"
+                android:clickable="true"
+                />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/colorAccent"
                 android:text="10% off on next visit"
                 android:textSize="15dp"
-                android:layout_marginLeft="20dp"/>
+                android:layout_marginLeft="20dp"
+                android:id="@+id/text_offer2"
+                android:clickable="true"/>
 
         </LinearLayout>
 
@@ -206,6 +211,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="654-854-9854"
+                        android:clickable="true"
                         android:id="@+id/text_contact"/>
                 </LinearLayout>
 

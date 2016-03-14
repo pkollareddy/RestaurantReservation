@@ -1,10 +1,12 @@
 package com.example.praneethkollareddy.restaurantreservation.adapters;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.location.Location;
 import android.location.LocationManager;
+import android.os.Handler;
 import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
@@ -15,6 +17,7 @@ import android.widget.TextView;
 import com.example.praneethkollareddy.restaurantreservation.R;
 import com.example.praneethkollareddy.restaurantreservation.ResData;
 import com.example.praneethkollareddy.restaurantreservation.activities.Main_Activity;
+import com.example.praneethkollareddy.restaurantreservation.activities.MakeReservation;
 import com.firebase.client.Query;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -30,6 +33,13 @@ public class ResListAdapter extends ResListFirebase<ResData> {
 
     String res_key;
     Location myLocation= new Location(LocationManager.NETWORK_PROVIDER), resLocation= new Location(LocationManager.NETWORK_PROVIDER);
+    private Handler customHandler = new Handler();
+    long timeInMilliseconds = 0L;
+    long timeSwapBuff = 0L;
+    long updatedTime = 0L;
+    Button btn_restime1,btn_restime2,btn_restime3;
+
+
 
     public ResListAdapter(Query ref, Activity activity, int layout) {
         super(ref, ResData.class, layout, activity);
@@ -115,22 +125,76 @@ public class ResListAdapter extends ResListFirebase<ResData> {
         String dollarrange = resData.getDollar_range();
         String rating = resData.getRating();
         String cuisine = resData.getCuisine();
-        String name = resData.getName();
+        final String name = resData.getName();
         String image = resData.getImage();
 
         byte[] decodedString = Base64.decode(image, Base64.DEFAULT);
         Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
 
         TextView res_dis = (TextView) v.findViewById(R.id.textview_distance);
-        TextView res_name = (TextView) v.findViewById(R.id.text_res_name);
+        final TextView res_name = (TextView) v.findViewById(R.id.text_res_name);
         TextView res_cuisine = (TextView) v.findViewById(R.id.text_res_cuisine);
         TextView res_dollarrange = (TextView) v.findViewById(R.id.text_dollar_range);
-        Button btn_waittime = (Button) v.findViewById(R.id.btn_wait_time);
+        final Button btn_waittime = (Button) v.findViewById(R.id.btn_wait_time);
         RatingBar res_rating = (RatingBar)v.findViewById(R.id.res_rating);
         ImageView img_res = (ImageView) v.findViewById(R.id.img_res);
-        Button btn_restime1 = (Button) v.findViewById(R.id.res_time1);
-        Button btn_restime2 = (Button) v.findViewById(R.id.res_time2);
-        Button btn_restime3 = (Button) v.findViewById(R.id.res_time3);
+        btn_restime1 = (Button) v.findViewById(R.id.res_time1);
+        btn_restime2 = (Button) v.findViewById(R.id.res_time2);
+        btn_restime3 = (Button) v.findViewById(R.id.res_time3);
+
+        btn_waittime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent in = new Intent(v.getContext(), MakeReservation.class);
+                in.putExtra("res_name",name);
+                in.putExtra("waittime",btn_waittime.getText().toString());
+                v.getContext().startActivity(in);
+
+
+            }
+        });
+
+        btn_restime1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent in = new Intent(v.getContext(), MakeReservation.class);
+                in.putExtra("res_name",name);
+                in.putExtra("res_time",btn_restime1.getText().toString());
+                v.getContext().startActivity(in);
+
+
+            }
+        });
+
+        btn_restime2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent in = new Intent(v.getContext(), MakeReservation.class);
+                in.putExtra("res_name",name);
+                in.putExtra("res_time",btn_restime2.getText().toString());
+                v.getContext().startActivity(in);
+
+
+            }
+        });
+
+
+        btn_restime3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent in = new Intent(v.getContext(), MakeReservation.class);
+                in.putExtra("res_name",name);
+                in.putExtra("res_time",btn_restime3.getText().toString());
+                v.getContext().startActivity(in);
+
+
+            }
+        });
+
+
 
 
 

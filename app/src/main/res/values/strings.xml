@@ -25,6 +25,22 @@
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="search_reservations">Find reservations with your phone number:</string>
 
+
+
+    //offer1 strings
+    <string name="offer_title">Get 500 points</string>
+    <string name="offer_details">500 Point reservations are only available during specific reservation times, and may not be available during holidays or in conjunction with other offers or promotions.</string>
+
+    //offer2 strings
+    <string name="offer2_title">10% off on next visit</string>
+    <string name="offer2_details">Discount only available for minimum invoice of $50. Only available during specific reservation times, and may not be available during holidays or in conjunction with other offers or promotions</string>
+
+    <string name="ok">OK</string>
+
+
+
+
+
     <string-array name="menuList">
         <item>Item A</item>
         <item>Item B</item>

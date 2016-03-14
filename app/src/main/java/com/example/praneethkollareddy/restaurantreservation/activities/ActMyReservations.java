@@ -6,6 +6,8 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -24,6 +26,7 @@ import java.util.List;
 public class ActMyReservations extends AppCompatActivity {
     Firebase myFirebaseRef;
     List<Reservation> reservationList = new ArrayList<>();
+    ReservationListAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,16 +35,16 @@ public class ActMyReservations extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        ListView displayList = (ListView) findViewById(R.id.reservation_list);
-        final ReservationListAdapter adapter = new ReservationListAdapter(this, R.layout.reservation_list, reservationList);
-        displayList.setAdapter(adapter);
+        final ListView displayList = (ListView) findViewById(R.id.reservation_list);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        Button searchButton = (Button) findViewById(R.id.phoneSearchButton);
+        searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 reservationList = queryReservations();
-                adapter.notifyDataSetChanged();
+                System.out.println(reservationList.size());
+                adapter = new ReservationListAdapter(ActMyReservations.this, R.layout.reservation_list, reservationList);
+                displayList.setAdapter(adapter);
             }
         });
     }
@@ -77,8 +80,6 @@ public class ActMyReservations extends AppCompatActivity {
                 System.out.println("The read failed: " + firebaseError.getMessage());
             }
         });
-
         return reservationList;
     }
-
 }

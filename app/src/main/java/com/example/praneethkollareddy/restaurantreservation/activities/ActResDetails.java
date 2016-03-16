@@ -4,23 +4,33 @@ import android.Manifest;
 import android.app.FragmentManager;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.app.DialogFragment;
-
-
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.praneethkollareddy.restaurantreservation.R;
+import com.example.praneethkollareddy.restaurantreservation.ResData;
 import com.example.praneethkollareddy.restaurantreservation.fragments.FragmentOffer2Details;
 import com.example.praneethkollareddy.restaurantreservation.fragments.FragmentOfferDetails;
+import com.firebase.client.DataSnapshot;
+import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
+import com.firebase.client.ValueEventListener;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
@@ -31,13 +41,15 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class ActResDetails extends AppCompatActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
+public class ActResDetails extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
     Button btn_reserve, btn_Order, btn_makeReservation, btn_orderFood;
     String res_name, res_dollar_range, res_waittime, res_rating, res_cuisine;
     GoogleMap resmap;
-    TextView offer1, offer2, phone;
+    TextView offer1, offer2, phone, price,cuisine,address;
     private GoogleApiClient mGoogleApiClient;
+    ResData resData;
+    LatLng resLoc = new LatLng(37,-121);
 
 
     @Override
@@ -47,6 +59,8 @@ public class ActResDetails extends AppCompatActivity implements OnMapReadyCallba
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        Firebase.setAndroidContext(this);
+
         if (mGoogleApiClient == null) {
             mGoogleApiClient = new GoogleApiClient.Builder(this)
                     .addConnectionCallbacks(this)
@@ -55,6 +69,19 @@ public class ActResDetails extends AppCompatActivity implements OnMapReadyCallba
                     .enableAutoManage(this, this)
                     .build();
         }
+
+
+
+        Intent in = getIntent();
+        res_name = in.getStringExtra("res_name");
+        res_cuisine = in.getStringExtra("res_cuisine");
+        res_dollar_range = in.getStringExtra("res_dollar_range");
+        res_rating = in.getStringExtra("res_rating");
+        res_waittime = in.getStringExtra("res_waittime");
+
+
+        FetchResDetails(res_name);
+
         SupportMapFragment mapFragment =
                 (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.resmap);
         mapFragment.getMapAsync((this));
@@ -66,22 +93,22 @@ public class ActResDetails extends AppCompatActivity implements OnMapReadyCallba
             @Override
             public void onMapClick(LatLng latLng) {
                 Intent in = new Intent(getApplicationContext(), MapsActivity.class);
+                in.putExtra("latitude", String.valueOf(latLng.latitude));
+                in.putExtra("longitude", String.valueOf(latLng.longitude));
+                in.putExtra("res_name", res_name);
+
                 startActivity(in);
             }
         });
 
-
-        Intent in = getIntent();
-        res_name = in.getStringExtra("res_name");
-        res_cuisine = in.getStringExtra("res_cuisine");
-        res_dollar_range = in.getStringExtra("res_dollar_range");
-        res_rating = in.getStringExtra("res_rating");
-        res_waittime = in.getStringExtra("res_waittime");
-
-
         setTitle(res_name);
 
         //map elements
+
+        price = (TextView) findViewById(R.id.text_price);
+        cuisine = (TextView) findViewById(R.id.text_cuisine);
+        address = (TextView) findViewById(R.id.text_address);
+
         btn_makeReservation = (Button) findViewById(R.id.btn_makeReservation);
         btn_orderFood = (Button) findViewById(R.id.btn_orderFood);
 
@@ -126,16 +153,11 @@ public class ActResDetails extends AppCompatActivity implements OnMapReadyCallba
             }
         });
 
-
-
-
-
-
         btn_makeReservation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Intent in = new Intent(getApplicationContext(),MakeReservation.class);
+                Intent in = new Intent(getApplicationContext(), MakeReservation.class);
                 in.putExtra("res_name", res_name);
                 startActivity(in);
 
@@ -145,8 +167,8 @@ public class ActResDetails extends AppCompatActivity implements OnMapReadyCallba
         btn_orderFood.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent in = new Intent(getApplicationContext(),ActOrder.class);
-                in.putExtra("res_name",res_name);
+                Intent in = new Intent(getApplicationContext(), ActOrder.class);
+                in.putExtra("res_name", res_name);
                 startActivity(in);
 
             }
@@ -161,7 +183,123 @@ public class ActResDetails extends AppCompatActivity implements OnMapReadyCallba
                         .setAction("Action", null).show();
             }
         });
+
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main_, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+
+            return true;
+        }
+
+        if (id == R.id.add_res) {
+            Intent in = new Intent(getApplicationContext(), AddRes.class);
+            startActivity(in);
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    @SuppressWarnings("StatementWithEmptyBody")
+
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        // Handle navigation view item clicks here.
+        int id = item.getItemId();
+
+        if (id == R.id.nav_camera) {
+            // Handle the camera action
+        } else if (id == R.id.nav_gallery) {
+
+        } else if (id == R.id.nav_reservations) {
+            Intent in = new Intent(getApplicationContext(), ActMyReservations.class);
+            startActivity(in);
+
+        } else if (id == R.id.nav_settings) {
+
+
+        } else if (id == R.id.nav_share) {
+
+        } else if (id == R.id.nav_send) {
+
+        }
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
+    }
+
+    public void FetchResDetails(final String res_name) {
+        Firebase myFirebaseRef = new Firebase("https://resplendent-heat-2353.firebaseio.com/Restaurants");
+
+
+        myFirebaseRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                for (DataSnapshot postSnapshot : snapshot.getChildren()) {
+                    resData = postSnapshot.getValue(ResData.class);
+                    //Toast.makeText(getApplicationContext(), res_name, Toast.LENGTH_SHORT).show();
+                    if (!resData.getName().isEmpty()) {
+
+                        if (resData.getName().equals(res_name)) {
+                            System.out.println(postSnapshot.getKey());
+
+                            price.setText(resData.getDollar_range());
+                            cuisine.setText(resData.getCuisine());
+
+                            StringBuilder sb = new StringBuilder();
+                            sb.append(resData.getStreet());
+                            sb.append(", ");
+                            sb.append(resData.getCity());
+                            sb.append(", ");
+                            sb.append(resData.getState());
+                            sb.append(", ");
+                            sb.append(resData.getZipcode());
+                            String add =  sb.toString();
+
+                            address.setText(add);
+                            resLoc = new LatLng(Double.parseDouble(resData.getLatitude()),Double.parseDouble(resData.getLongitude()));
+
+
+
+
+
+
+                        } else {
+
+                        }
+                    }
+                }
+
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+                System.out.println("The read failed: " + firebaseError.getMessage());
+            }
+        });
+
+    }
+
 
 
     private void showOffer1Dialog() {
@@ -170,6 +308,7 @@ public class ActResDetails extends AppCompatActivity implements OnMapReadyCallba
         DialogFragment newFragment = new FragmentOfferDetails();
         newFragment.show(fm, "offer1");
     }
+
     private void showOffer2Dialog() {
         FragmentManager fm = this.getFragmentManager();
 
@@ -177,13 +316,11 @@ public class ActResDetails extends AppCompatActivity implements OnMapReadyCallba
         newFragment.show(fm, "offer2");
     }
 
-
-
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        resmap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(37.3, -121.9), 13));
-        resmap.addMarker(new MarkerOptions().position(new LatLng(37.3, -121.9)).title("Restaurant"));
-        
+        resmap.moveCamera(CameraUpdateFactory.newLatLngZoom(resLoc, 13));
+        resmap.addMarker(new MarkerOptions().position(resLoc).title(res_name));
+
     }
 
     @Override

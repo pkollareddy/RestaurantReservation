@@ -112,10 +112,11 @@ public class MakeReservation extends AppCompatActivity implements NavigationView
         DateFormat df = new SimpleDateFormat("MMM dd, yyyy");
         String now = df.format(new Date());
 
+        rname.setText(res_name);
+
         if(res_time!=null){
             rdate.setText(now);
             rtime.setText(res_time);
-            rname.setText(res_name);
         }
 
         final String waittime = in.getStringExtra("waittime");
@@ -129,7 +130,6 @@ public class MakeReservation extends AppCompatActivity implements NavigationView
         if(timer!=0) {
 
             layout_timer.setVisibility(View.VISIBLE);
-            rname.setText(res_name);
             long startTime = timer * 60 * 1000;
             countDownTimer = new CountDownTimer(startTime, 1000) {
                 @Override

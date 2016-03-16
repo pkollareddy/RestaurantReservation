@@ -170,6 +170,24 @@
                 android:name="com.google.android.gms.maps.SupportMapFragment"
                 android:layout_width="match_parent"
                 android:layout_height="180dp"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Address"
+                    android:textColor="@color/colorBlack"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/text_address"
+                    android:layout_marginLeft="5dp"
+                    />
+
+
+            </LinearLayout>
 
         </LinearLayout>
 
@@ -216,9 +234,6 @@
                 </LinearLayout>
 
             </LinearLayout>
-
-
-
 
             //layout row item1 - price/////////////////////////////////////////////////////////////////////////
             <LinearLayout

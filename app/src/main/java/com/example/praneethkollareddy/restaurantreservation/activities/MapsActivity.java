@@ -1,6 +1,7 @@
 package com.example.praneethkollareddy.restaurantreservation.activities;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
@@ -19,9 +20,10 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class MapsActivity extends AppCompatActivity  implements NavigationView.OnNavigationItemSelectedListener,OnMapReadyCallback {
+public class MapsActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, OnMapReadyCallback {
 
     private GoogleMap mMap;
+    String lat, lng;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +39,6 @@ public class MapsActivity extends AppCompatActivity  implements NavigationView.O
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
 
 
     }
@@ -56,17 +57,25 @@ public class MapsActivity extends AppCompatActivity  implements NavigationView.O
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
+        Intent in = getIntent();
+        lat = in.getStringExtra("latitude");
+        lng = in.getStringExtra("longitude");
+        String rname = in.getStringExtra("res_name");
+
+
         // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
+        LatLng sydney = new LatLng(Double.parseDouble(lat), Double.parseDouble(lng));
+        mMap.addMarker(new MarkerOptions().position(sydney).title(rname));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        mMap.animateCamera(CameraUpdateFactory.zoomTo(13));
+
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main_, menu);
+        getMenuInflater().inflate(R.menu.menu_map_activity, menu);
         return true;
     }
 
@@ -78,16 +87,21 @@ public class MapsActivity extends AppCompatActivity  implements NavigationView.O
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_directions) {
 
+            String myLat, myLng, myLoc, resLoc;
+            myLat = String.valueOf(Main_Activity.myLoc.getLatitude());
+            myLng = String.valueOf(Main_Activity.myLoc.getLongitude());
+            myLoc = myLat + "," + myLng;
+            resLoc = lat + "," + lng;
+
+
+            Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
+                    Uri.parse("http://maps.google.com/maps?saddr=" + myLoc + "&daddr=" + resLoc));
+            startActivity(intent);
             return true;
         }
 
-        if (id == R.id.add_res) {
-            Intent in = new Intent(getApplicationContext(), AddRes.class);
-            startActivity(in);
-            return true;
-        }
 
         return super.onOptionsItemSelected(item);
     }

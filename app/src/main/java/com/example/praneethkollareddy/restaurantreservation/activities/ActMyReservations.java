@@ -32,7 +32,7 @@ public class ActMyReservations extends AppCompatActivity implements NavigationVi
     Firebase myFirebaseRef;
     List<Reservation> reservationList = new ArrayList<>();
     ReservationListAdapter adapter;
-    TextView viewInvoice,cancellationPolicy,changeRsv, cancelRsv,writeReview;
+    TextView viewInvoice, cancellationPolicy, changeRsv, cancelRsv, writeReview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,6 +97,17 @@ public class ActMyReservations extends AppCompatActivity implements NavigationVi
         });
         return reservationList;
 
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
     }
 
 
@@ -139,15 +150,17 @@ public class ActMyReservations extends AppCompatActivity implements NavigationVi
         if (id == R.id.nav_reserveTable) {
             Intent in = new Intent(getApplicationContext(), Main_Activity.class);
             startActivity(in);
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_reservations) {
+        } else if (id == R.id.nav_writeReview) {
             Intent in = new Intent(getApplicationContext(), ActMyReservations.class);
             startActivity(in);
 
-        } else if (id == R.id.nav_settings) {
+        } else if (id == R.id.nav_myReservations) {
+            Intent in = new Intent(getApplicationContext(), ActMyReservations.class);
+            startActivity(in);
 
+        } else if (id == R.id.nav_myAccount) {
+            Intent in = new Intent(getApplicationContext(), ActAccount.class);
+            startActivity(in);
 
         } else if (id == R.id.nav_share) {
 
@@ -159,11 +172,4 @@ public class ActMyReservations extends AppCompatActivity implements NavigationVi
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
-
-
-
-
-
-
 }

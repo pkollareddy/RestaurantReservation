@@ -279,14 +279,16 @@ public class ActResDetails extends AppCompatActivity implements NavigationView.O
             Intent in = new Intent(getApplicationContext(), Main_Activity.class);
             startActivity(in);
             // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_reservations) {
+        } else if (id == R.id.nav_myAccount) {
+            Intent in = new Intent(getApplicationContext(), ActAccount.class);
+            startActivity(in);
+        } else if (id == R.id.nav_myReservations) {
             Intent in = new Intent(getApplicationContext(), ActMyReservations.class);
             startActivity(in);
 
-        } else if (id == R.id.nav_settings) {
-
+        } else if (id == R.id.nav_writeReview) {
+            Intent in = new Intent(getApplicationContext(), ActMyReservations.class);
+            startActivity(in);
 
         } else if (id == R.id.nav_share) {
 

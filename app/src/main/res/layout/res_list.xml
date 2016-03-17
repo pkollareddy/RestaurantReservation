@@ -54,7 +54,7 @@
             <Button
                 android:id="@+id/res_time1"
                 android:layout_width="50dp"
-                android:layout_height="30dp"
+                android:layout_height="20dp"
                 android:background="@drawable/restime"
                 android:clickable="true"
                 android:focusable="false"
@@ -68,7 +68,7 @@
             <Button
                 android:id="@+id/res_time2"
                 android:layout_width="50dp"
-                android:layout_height="30dp"
+                android:layout_height="20dp"
                 android:layout_marginLeft="10dp"
                 android:background="@drawable/restime"
                 android:clickable="true"
@@ -85,7 +85,7 @@
             <Button
                 android:id="@+id/res_time3"
                 android:layout_width="50dp"
-                android:layout_height="30dp"
+                android:layout_height="20dp"
                 android:layout_marginLeft="10dp"
                 android:background="@drawable/restime"
                 android:clickable="true"

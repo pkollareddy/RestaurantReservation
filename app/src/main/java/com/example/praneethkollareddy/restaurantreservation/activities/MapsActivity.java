@@ -113,7 +113,9 @@ public class MapsActivity extends AppCompatActivity implements NavigationView.On
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.nav_reserveTable) {
+            Intent in = new Intent(getApplicationContext(), Main_Activity.class);
+            startActivity(in);
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
 

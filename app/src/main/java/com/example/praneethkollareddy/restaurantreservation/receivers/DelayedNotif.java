@@ -1,4 +1,4 @@
-package com.example.praneethkollareddy.restaurantreservation;
+package com.example.praneethkollareddy.restaurantreservation.receivers;
 
 
 import android.app.NotificationManager;
@@ -6,6 +6,8 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.NotificationCompat;
+
+import com.example.praneethkollareddy.restaurantreservation.R;
 
 public class DelayedNotif extends BroadcastReceiver {
 

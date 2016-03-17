@@ -1,4 +1,4 @@
-package com.example.praneethkollareddy.restaurantreservation;
+package com.example.praneethkollareddy.restaurantreservation.fragments;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
@@ -34,7 +34,7 @@ public class ReservationDatePickerFragment extends DialogFragment {
         int day = c.get(Calendar.DAY_OF_MONTH);
 
         DatePickerDialog dateDiag = new DatePickerDialog(getActivity(), mListener, year, month, day);
-        dateDiag.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
+        dateDiag.getDatePicker().setMinDate(System.currentTimeMillis());
         return dateDiag;
     }
 }

@@ -1,4 +1,4 @@
-package com.example.praneethkollareddy.restaurantreservation;
+package com.example.praneethkollareddy.restaurantreservation.fragments;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -18,6 +18,7 @@ public class ReservationTimePickerFragment extends DialogFragment{
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         mActivity = activity;
+
 
         try {
             mListener = (TimePickerDialog.OnTimeSetListener) activity;

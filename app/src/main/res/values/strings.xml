@@ -1,11 +1,10 @@
 <resources>
     <string name="app_name">ReRe</string>
     <string name="action_settings">Settings</string>
-    <string name="title_activity_main">MainActivity</string>
     <string name="title_activity_main_">ReRe</string>
-    <string name="title_add_res">Add New Restaurant</string>
+    <string name="title_add_res">Add new Restaurant</string>
     <string name="title_add_res_details">Restaurant Name</string>
-    <string name="title_make_reservation">Make Reservation</string>
+    <string name="title_make_reservation">Make a reservation</string>
 
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -17,28 +16,31 @@
     <string name="date_button">Choose Date</string>
     <string name="time_button">Select Time</string>
     <string name="save_button">Make Reservation</string>
-    <string name="confirm_human">Click here to get a verification code</string>
-    <string name="enter_code">Enter the verification code here</string>
+    <string name="confirm_human">Get a verification code</string>
+    <string name="enter_code">Enter the code here</string>
 
-    <string name="title_activity_act_my_reservations">ActMyReservations</string>
+    <string name="title_activity_act_my_reservations">My Reservations</string>
     <string name="title_activity_act_order">Menu</string>
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="search_reservations">Enter your number:</string>
 
 
-
+    //fragment strings
     //offer1 strings
     <string name="offer_title">Get 500 points</string>
     <string name="offer_details">500 Point reservations are only available during specific reservation times, and may not be available during holidays or in conjunction with other offers or promotions.</string>
-
     //offer2 strings
     <string name="offer2_title">10% off on next visit</string>
     <string name="offer2_details">Discount only available for minimum invoice of $50. Only available during specific reservation times, and may not be available during holidays or in conjunction with other offers or promotions</string>
+    //cancellation policy
+    <string name="cancellationPolicy">
+Reserve has access to great tables because we give our restaurant partners peace of mind that our diners will arrive. Once your reservation is confirmed, a restaurant is setting aside a table especially for you. We understand that plans can change, so if you need to change or cancel your reservation, please follow the guidelines and cancellation policy below to avoid being charged a Late Cancellation or Missed Reservation Fee.
+ </string>
 
     <string name="ok">OK</string>
+    <string name="facebook_app_id">1581720592145936</string>
 
-
-
+    facebook_app_id
 
 
     <string-array name="menuList">
@@ -50,6 +52,7 @@
         <item>Item F</item>
     </string-array>
     <string name="title_activity_maps">Map</string>
+    <string name="title_activity_act_account">ActAccount</string>
 
 
 </resources>

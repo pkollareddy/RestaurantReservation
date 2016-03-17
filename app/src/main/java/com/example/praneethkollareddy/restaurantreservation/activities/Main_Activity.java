@@ -21,17 +21,12 @@ import android.view.MenuItem;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.praneethkollareddy.restaurantreservation.R;
-import com.example.praneethkollareddy.restaurantreservation.ResData;
 import com.example.praneethkollareddy.restaurantreservation.adapters.ResListAdapter;
-import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
-import com.firebase.client.FirebaseError;
-import com.firebase.client.ValueEventListener;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
@@ -44,11 +39,13 @@ import com.google.android.gms.maps.model.LatLng;
 public class Main_Activity extends AppCompatActivity
         implements LocationListener, NavigationView.OnNavigationItemSelectedListener, OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
+    public static String phone = "6508669800";
+
     private GoogleApiClient mGoogleApiClient;
     public static String Latitude = "37", Longitude = "-121";
     public static Location myLoc = new Location(LocationManager.NETWORK_PROVIDER);
     public static GoogleMap googleMap;
-    public static String rName, rRating, rCuisine, rDollarRange, rImage;
+    public static String rName,rWaittime;
 
     public String res_key;
     ListView res_list;
@@ -111,25 +108,13 @@ public class Main_Activity extends AppCompatActivity
         res_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-
-
-
-                rName = ((TextView) findViewById(R.id.text_res_name)).getText().toString();
-                rCuisine = ((TextView) findViewById(R.id.text_res_cuisine)).getText().toString();
-                rDollarRange = ((TextView) findViewById(R.id.text_dollar_range)).getText().toString();
-                RatingBar raiting = (RatingBar) findViewById(R.id.res_rating);
-                rRating = String.valueOf(raiting.getRating());
-                String waittime = ((Button) findViewById(R.id.btn_wait_time)).getText().toString();
+                rName = ((TextView) view.findViewById(R.id.text_res_name)).getText().toString();
+                rWaittime = ((Button) view.findViewById(R.id.btn_wait_time)).getText().toString();
 
                 //pass values through intent
                 Intent in = new Intent(getApplicationContext(), ActResDetails.class);
                 in.putExtra("res_name", rName);
-                in.putExtra("res_cuisine", rCuisine);
-                in.putExtra("res_dollar_range", rDollarRange);
-                in.putExtra("res_rating", rRating);
-                in.putExtra("res_waittime", waittime);
-                in.putExtra("res_key", res_key);
+                in.putExtra("waittime", rWaittime);
                 startActivity(in);
 
 
@@ -200,7 +185,7 @@ public class Main_Activity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.nav_reserveTable) {
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
 
@@ -214,6 +199,11 @@ public class Main_Activity extends AppCompatActivity
         } else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {
+
+        }
+        else if (id == R.id.nav_account) {
+            Intent in = new Intent(getApplicationContext(), ActAccount.class);
+            startActivity(in);
 
         }
 

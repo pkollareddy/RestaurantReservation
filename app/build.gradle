@@ -25,6 +25,10 @@ android {
     }
 }
 
+repositories {
+    mavenCentral()
+}
+
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
@@ -33,5 +37,7 @@ dependencies {
     compile 'com.firebase:firebase-client-android:2.5.0+'
     compile 'com.google.android.gms:play-services-location:8.4.0'
     compile 'com.google.android.gms:play-services-maps:8.4.0'
+    compile 'com.facebook.android:facebook-android-sdk:4.+'
+
 
 }

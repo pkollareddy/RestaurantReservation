@@ -7,6 +7,9 @@ import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.AssetManager;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,9 +21,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.praneethkollareddy.restaurantreservation.R;
-import com.example.praneethkollareddy.restaurantreservation.Reservation;
+import com.example.praneethkollareddy.restaurantreservation.databeans.Reservation;
 import com.example.praneethkollareddy.restaurantreservation.activities.ActOrder;
+import com.example.praneethkollareddy.restaurantreservation.fragments.FragmentCancelReservation;
 import com.example.praneethkollareddy.restaurantreservation.fragments.FragmentCancellationPolicy;
+import com.example.praneethkollareddy.restaurantreservation.fragments.FragmentChangeReservation;
+import com.example.praneethkollareddy.restaurantreservation.fragments.FragmentWriteReview;
 
 import java.io.File;
 import java.io.IOException;
@@ -31,10 +37,12 @@ import java.util.List;
 
 public class ReservationListAdapter extends ArrayAdapter<Reservation> {
     private final List<Reservation> reservationList;
+    String rTime, rName, rDate, rResName, rParty, rShare, rGenTime;
+
 
     public static class ViewHolder {
-        public TextView textView, rsvName, rsvDate, rsvTime,viewInvoice,cancellationPolicy,changeRsv,cancelRsv,orderFood,writeReview;
-        public LinearLayout changeReservation, viewReservation;
+        public TextView partySize, genTime, resName, rsvName, rsvDate, rsvTime, viewInvoice, cancellationPolicy, changeRsv, cancelRsv, orderFood, writeReview, share;
+        public LinearLayout changeReservation, viewReservation, rsv_layout;
     }
 
     public ReservationListAdapter(Context context, int resource, List<Reservation> noteList) {
@@ -43,36 +51,85 @@ public class ReservationListAdapter extends ArrayAdapter<Reservation> {
     }
 
     @Override
-    public View getView(int position, final View  convertView, ViewGroup parent) {
+    public View getView(int position, final View convertView, ViewGroup parent) {
         Reservation reservation = reservationList.get(position);
+
+        String hr, min;
+        if (reservation.getHour() < 10) hr = "0" + String.valueOf(reservation.getHour());
+        else hr = String.valueOf(reservation.getHour());
+
+        if (reservation.getMinute() < 10) min = "0" + String.valueOf(reservation.getMinute());
+        else min = String.valueOf(reservation.getMinute());
+
+
+        rTime = hr + ":" + min;
+        rDate = String.valueOf(reservation.getMonth() + "/" + reservation.getDay() + "/" + reservation.getYear());
+        rName = reservation.getName();
+        rParty = String.valueOf(reservation.getParty());
+        rResName = reservation.getrName();
+        rGenTime = reservation.getGenTime();
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("Reservation confirmed: ");
+        sb.append(rResName);
+        sb.append("on ");
+        sb.append(rDate);
+        sb.append(" at ");
+        sb.append(rTime);
+        sb.append(" for party of ");
+        sb.append(rParty);
+        sb.append(" Address: 637 El Camino Real, Santa Clara, CA, 95050 Tel:654-854-9854");
+
+        rShare = sb.toString();
 
         final View row;
         ViewHolder viewHolder;
 
-        if(convertView == null) {
+        if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) getContext().getSystemService
                     (Context.LAYOUT_INFLATER_SERVICE);
             row = inflater.inflate(R.layout.reservation_list, null);
 
             viewHolder = new ViewHolder();
-            viewHolder.textView = (TextView) row.findViewById(R.id.reservation_text);
+            viewHolder.partySize = (TextView) row.findViewById(R.id.text_partySize);
+            viewHolder.genTime = (TextView) row.findViewById(R.id.text_genTime);
+            viewHolder.resName = (TextView) row.findViewById(R.id.text_resName);
             viewHolder.rsvName = (TextView) row.findViewById(R.id.text_reserveName);
             viewHolder.rsvDate = (TextView) row.findViewById(R.id.text_reserveDate);
             viewHolder.rsvTime = (TextView) row.findViewById(R.id.text_reserveTime);
-            viewHolder.changeReservation =(LinearLayout) row.findViewById(R.id.layout_changeReservation);
-            viewHolder.viewReservation =(LinearLayout) row.findViewById(R.id.layout_viewReservation);
+            viewHolder.changeReservation = (LinearLayout) row.findViewById(R.id.layout_changeReservation);
+            viewHolder.viewReservation = (LinearLayout) row.findViewById(R.id.layout_viewReservation);
             viewHolder.viewInvoice = (TextView) row.findViewById(R.id.text_viewInvoice);
             viewHolder.cancellationPolicy = (TextView) row.findViewById(R.id.text_cancellationPolicy);
             viewHolder.changeRsv = (TextView) row.findViewById(R.id.text_changeReservation);
             viewHolder.cancelRsv = (TextView) row.findViewById(R.id.text_cancelReservation);
             viewHolder.orderFood = (TextView) row.findViewById(R.id.text_orderFood);
             viewHolder.writeReview = (TextView) row.findViewById(R.id.text_writeReview);
+            viewHolder.share = (TextView) row.findViewById(R.id.text_share);
+            viewHolder.rsv_layout = (LinearLayout)row.findViewById(R.id.layout_rsv);
 
             row.setTag(viewHolder);
         } else {
             row = convertView;
             viewHolder = (ViewHolder) row.getTag();
         }
+
+        if(reservation.getDay()>20) {
+
+            viewHolder.rsv_layout.setBackgroundColor(Color.parseColor("#FF4081"));
+        }
+        viewHolder.share.setTag(position);
+        viewHolder.share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent sendIntent = new Intent();
+                sendIntent.setAction(Intent.ACTION_SEND);
+                sendIntent.putExtra(Intent.EXTRA_TEXT, rShare);
+                sendIntent.setType("text/plain");
+                row.getContext().startActivity(sendIntent);
+
+            }
+        });
 
 
         viewHolder.viewInvoice.setTag(position);
@@ -127,33 +184,31 @@ public class ReservationListAdapter extends ArrayAdapter<Reservation> {
             @Override
             public void onClick(View v) {
 
-//                FragmentManager fm = row.getContext().getFragmentManager();
-//
-//                DialogFragment newFragment = new FragmentCancellationPolicy();
-//                newFragment.show(fm, "offer1");
-                Toast.makeText(row.getContext(),"policy",Toast.LENGTH_SHORT).show();
+                final Context context = row.getContext();
+                FragmentManager fm = ((Activity) context).getFragmentManager();
+                DialogFragment newFragment = new FragmentCancellationPolicy();
+                newFragment.show(fm, "offer1");
+                //Toast.makeText(row.getContext(),"policy",Toast.LENGTH_SHORT).show();
             }
         });
         viewHolder.changeRsv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-//                FragmentManager fm = row.getContext().getFragmentManager();
-//
-//                DialogFragment newFragment = new FragmentCancellationPolicy();
-//                newFragment.show(fm, "offer1");
-                Toast.makeText(row.getContext(),"change",Toast.LENGTH_SHORT).show();
+                final Context context = row.getContext();
+                FragmentManager fm = ((Activity) context).getFragmentManager();
+                DialogFragment newFragment = new FragmentChangeReservation();
+                newFragment.show(fm, "offer1");
             }
         });
         viewHolder.cancelRsv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-//                FragmentManager fm = row.getContext().getFragmentManager();
-//
-//                DialogFragment newFragment = new FragmentCancellationPolicy();
-//                newFragment.show(fm, "offer1");
-                Toast.makeText(row.getContext(),"cancel",Toast.LENGTH_SHORT).show();
+               final Context context = row.getContext();
+                FragmentManager fm = ((Activity) context).getFragmentManager();
+                DialogFragment newFragment = new FragmentCancelReservation();
+                newFragment.show(fm, "review");
             }
         });
         viewHolder.orderFood.setOnClickListener(new View.OnClickListener() {
@@ -162,50 +217,41 @@ public class ReservationListAdapter extends ArrayAdapter<Reservation> {
 
                 Intent in = new Intent(row.getContext(), ActOrder.class);
                 row.getContext().startActivity(in);
-
-//                FragmentManager fm = row.getContext().getFragmentManager();
-//
-//                DialogFragment newFragment = new FragmentCancellationPolicy();
-//                newFragment.show(fm, "offer1");
-                Toast.makeText(row.getContext(),"Order food for your reservation",Toast.LENGTH_SHORT).show();
+                Toast.makeText(row.getContext(), "Order food for your reservation", Toast.LENGTH_SHORT).show();
             }
         });
         viewHolder.writeReview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-//                FragmentManager fm = row.getContext().getFragmentManager();
-//
-//                DialogFragment newFragment = new FragmentCancellationPolicy();
-//                newFragment.show(fm, "offer1");
-                Toast.makeText(row.getContext(),"Review",Toast.LENGTH_SHORT).show();
+                final Context context = row.getContext();
+                FragmentManager fm = ((Activity) context).getFragmentManager();
+                DialogFragment newFragment = new FragmentWriteReview();
+                newFragment.show(fm, "review");
             }
         });
-
-
 
 
         Calendar c = Calendar.getInstance();
 
         int daynow = c.get(Calendar.DAY_OF_MONTH);
-        if(daynow> reservation.getDay()) {
+        if (daynow > reservation.getDay()) {
             viewHolder.changeReservation.setVisibility(View.GONE);
             viewHolder.viewReservation.setVisibility(View.VISIBLE);
-        }
-        else
-        {
+        } else {
             viewHolder.changeReservation.setVisibility(View.VISIBLE);
             viewHolder.viewReservation.setVisibility(View.GONE);
         }
 
-        viewHolder.rsvName.setText(reservation.getName());
-        viewHolder.rsvDate.setText(reservation.getMonth() + "/" + reservation.getDay() + "/" + reservation.getYear());
-        viewHolder.rsvTime.setText(reservation.getHour() + ":" + reservation.getMinute());
+        viewHolder.rsvName.setText(rName);
+        viewHolder.rsvDate.setText(rDate);
+        viewHolder.rsvTime.setText(rTime);
+        viewHolder.partySize.setText(rParty);
 
-        viewHolder.textView.setText("Restaurant name at " + reservation.getHour() + ":" + reservation.getMinute() + " on " + reservation.getMonth() + "/" + reservation.getDay() + "/" + reservation.getYear() + " for " + reservation.getParty() + " people.");
+        viewHolder.resName.setText(rResName);
+        viewHolder.genTime.setText(rGenTime);
         return row;
     }
-
 
 
 }

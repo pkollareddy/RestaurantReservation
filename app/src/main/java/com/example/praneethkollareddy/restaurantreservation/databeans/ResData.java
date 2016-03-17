@@ -1,4 +1,4 @@
-package com.example.praneethkollareddy.restaurantreservation;
+package com.example.praneethkollareddy.restaurantreservation.databeans;
 
 /**
  * Created by INSPIRON on 19-Feb-16.

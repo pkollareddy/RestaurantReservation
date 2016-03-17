@@ -6,7 +6,6 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Path;
 import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
@@ -23,7 +22,6 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.praneethkollareddy.restaurantreservation.GeocodingLocation;
 import com.example.praneethkollareddy.restaurantreservation.R;

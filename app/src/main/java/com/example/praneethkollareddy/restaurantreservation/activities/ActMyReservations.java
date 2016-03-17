@@ -1,14 +1,8 @@
 package com.example.praneethkollareddy.restaurantreservation.activities;
 
-import android.app.DialogFragment;
-import android.app.FragmentManager;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -17,27 +11,20 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ExpandableListView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.praneethkollareddy.restaurantreservation.R;
-import com.example.praneethkollareddy.restaurantreservation.Reservation;
+import com.example.praneethkollareddy.restaurantreservation.databeans.Reservation;
 import com.example.praneethkollareddy.restaurantreservation.adapters.ReservationListAdapter;
-import com.example.praneethkollareddy.restaurantreservation.fragments.FragmentCancellationPolicy;
-import com.example.praneethkollareddy.restaurantreservation.fragments.FragmentOfferDetails;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
 
-import org.w3c.dom.Text;
-
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,25 +40,15 @@ public class ActMyReservations extends AppCompatActivity implements NavigationVi
         setContentView(R.layout.activity_act_my_reservations);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        Firebase.setAndroidContext(this);
+
         //map elements
         final ListView displayList = (ListView) findViewById(R.id.reservation_list);
 
-
-
-
-
-        Button searchButton = (Button) findViewById(R.id.phoneSearchButton);
-        searchButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                reservationList = queryReservations();
-                System.out.println(reservationList.size());
-                adapter = new ReservationListAdapter(ActMyReservations.this, R.layout.reservation_list, reservationList);
-                displayList.setAdapter(adapter);
-
-
-            }
-        });
+        reservationList = queryReservations();
+        System.out.println(reservationList.size());
+        adapter = new ReservationListAdapter(ActMyReservations.this, R.layout.reservation_list, reservationList);
+        displayList.setAdapter(adapter);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -89,14 +66,15 @@ public class ActMyReservations extends AppCompatActivity implements NavigationVi
         myFirebaseRef = new Firebase("https://resplendent-heat-2353.firebaseio.com");
         Firebase refReservations = myFirebaseRef.child("Reservations");
         reservationList = new ArrayList<>();
-        EditText phoneInput = (EditText) findViewById(R.id.phoneSearchEntry);
         final long phone;
-        if (phoneInput.getText().toString().isEmpty()) {
-            Toast.makeText(getApplicationContext(), "Please enter a number.", Toast.LENGTH_SHORT).show();
-            return reservationList;
-        } else {
-            phone = Long.parseLong(phoneInput.getText().toString());
-        }
+//        if (phoneInput.getText().toString().isEmpty()) {
+//            Toast.makeText(getApplicationContext(), "Please enter a number.", Toast.LENGTH_SHORT).show();
+//            return reservationList;
+//        } else {
+//            phone = Long.parseLong(phoneInput.getText().toString());
+//        }
+
+        phone = Long.parseLong(Main_Activity.phone);
         refReservations.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
@@ -158,7 +136,9 @@ public class ActMyReservations extends AppCompatActivity implements NavigationVi
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.nav_reserveTable) {
+            Intent in = new Intent(getApplicationContext(), Main_Activity.class);
+            startActivity(in);
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
 

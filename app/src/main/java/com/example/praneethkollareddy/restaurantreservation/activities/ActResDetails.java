@@ -4,9 +4,11 @@ import android.Manifest;
 import android.app.FragmentManager;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.location.Location;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
@@ -14,17 +16,18 @@ import android.app.DialogFragment;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.praneethkollareddy.restaurantreservation.R;
-import com.example.praneethkollareddy.restaurantreservation.ResData;
+import com.example.praneethkollareddy.restaurantreservation.databeans.ResData;
 import com.example.praneethkollareddy.restaurantreservation.fragments.FragmentOffer2Details;
 import com.example.praneethkollareddy.restaurantreservation.fragments.FragmentOfferDetails;
 import com.firebase.client.DataSnapshot;
@@ -41,15 +44,21 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
 public class ActResDetails extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
-    Button btn_reserve, btn_Order, btn_makeReservation, btn_orderFood;
-    String res_name, res_dollar_range, res_waittime, res_rating, res_cuisine;
+    Button btn_makeReservation, btn_orderFood;
+    String res_name;
     GoogleMap resmap;
     TextView offer1, offer2, phone, price,cuisine,address;
     private GoogleApiClient mGoogleApiClient;
     ResData resData;
     LatLng resLoc = new LatLng(37,-121);
+    ImageView image1;
 
 
     @Override
@@ -74,11 +83,8 @@ public class ActResDetails extends AppCompatActivity implements NavigationView.O
 
         Intent in = getIntent();
         res_name = in.getStringExtra("res_name");
-        res_cuisine = in.getStringExtra("res_cuisine");
-        res_dollar_range = in.getStringExtra("res_dollar_range");
-        res_rating = in.getStringExtra("res_rating");
-        res_waittime = in.getStringExtra("res_waittime");
 
+        setTitle(res_name);
 
         FetchResDetails(res_name);
 
@@ -101,16 +107,42 @@ public class ActResDetails extends AppCompatActivity implements NavigationView.O
             }
         });
 
-        setTitle(res_name);
 
         //map elements
-
+        image1 = (ImageView) findViewById(R.id.img_res);
         price = (TextView) findViewById(R.id.text_price);
         cuisine = (TextView) findViewById(R.id.text_cuisine);
         address = (TextView) findViewById(R.id.text_address);
-
         btn_makeReservation = (Button) findViewById(R.id.btn_makeReservation);
         btn_orderFood = (Button) findViewById(R.id.btn_orderFood);
+
+        image1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.res_fiorillo);
+
+                ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 40, bytes);
+
+                File f = new File(Environment.getExternalStorageDirectory()
+                        + File.separator + "test.jpg");
+                try {
+                    f.createNewFile();
+                    FileOutputStream fo = new FileOutputStream(f);
+                    fo.write(bytes.toByteArray());
+                    fo.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+
+                Uri path = Uri.fromFile(f);
+                Intent intent = new Intent();
+                intent.setAction(Intent.ACTION_VIEW);
+                intent.setDataAndType(path, "image/*");
+                startActivity(intent);
+            }
+        });
 
         offer1 = (TextView) findViewById(R.id.text_offer1);
         offer1.setOnClickListener(new View.OnClickListener() {
@@ -175,20 +207,37 @@ public class ActResDetails extends AppCompatActivity implements NavigationView.O
         });
 
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
+//            }
+//        });
 
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.setDrawerListener(toggle);
+        toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
     }
+
+    @Override
+    public void onBackPressed() {
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -226,7 +275,9 @@ public class ActResDetails extends AppCompatActivity implements NavigationView.O
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.nav_reserveTable) {
+            Intent in = new Intent(getApplicationContext(), Main_Activity.class);
+            startActivity(in);
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
 

@@ -1,4 +1,4 @@
-package com.example.praneethkollareddy.restaurantreservation;
+package com.example.praneethkollareddy.restaurantreservation.databeans;
 
 /**
  * Created by praneethkollareddy on 2/20/16.
@@ -14,10 +14,12 @@ public class Reservation {
     private int day;
     private int hour;
     private int minute;
+    String rName;
+    String genTime;
 
     public Reservation() {}
 
-    public Reservation(String name, String email, String phone, int party, int year, int month, int day, int hour, int minute) {
+    public Reservation(String name, String email, String phone, int party, int year, int month, int day, int hour, int minute, String rName, String genTime) {
         this.name = name;
         this.email = email;
         this.phone = phone;
@@ -27,6 +29,17 @@ public class Reservation {
         this.day = day;
         this.hour = hour;
         this.minute = minute;
+        this.rName = rName;
+        this.genTime = genTime;
+    }
+
+    public String getGenTime(){
+
+        return genTime;
+    }
+
+    public String getrName(){
+        return rName;
     }
 
     public String getName() {

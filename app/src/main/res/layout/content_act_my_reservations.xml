@@ -14,42 +14,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-
-        <LinearLayout
-            android:id="@+id/searchFrame"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:orientation="horizontal"
-            android:padding="10dp"
-            android:background="@color/colorWhite">
-
-            <TextView
-                android:id="@+id/phoneSearchPrompt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/search_reservations"
-                android:textAppearance="?android:attr/textAppearanceSmall" />
-
-            <EditText
-                android:id="@+id/phoneSearchEntry"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:ems="8"
-                android:inputType="phone"
-                android:textSize="14dp"
-                android:text="6508669800"/>
-
-            <Button
-                android:id="@+id/phoneSearchButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Search" />
-
-        </LinearLayout>
-
         <ListView
             android:id="@+id/reservation_list"
             android:layout_width="match_parent"

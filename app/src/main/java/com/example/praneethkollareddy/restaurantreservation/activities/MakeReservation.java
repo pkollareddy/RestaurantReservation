@@ -17,13 +17,11 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.telephony.SmsManager;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -35,10 +33,13 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.example.praneethkollareddy.restaurantreservation.R;
-import com.example.praneethkollareddy.restaurantreservation.Reservation;
-import com.example.praneethkollareddy.restaurantreservation.ReservationDatePickerFragment;
-import com.example.praneethkollareddy.restaurantreservation.ReservationTimePickerFragment;
-import com.example.praneethkollareddy.restaurantreservation.DelayedNotif;
+import com.example.praneethkollareddy.restaurantreservation.databeans.Reservation;
+import com.example.praneethkollareddy.restaurantreservation.fragments.ReservationDatePickerFragment;
+import com.example.praneethkollareddy.restaurantreservation.fragments.ReservationTimePickerFragment;
+import com.example.praneethkollareddy.restaurantreservation.receivers.DelayedNotif;
+import com.facebook.FacebookDialog;
+import com.facebook.FacebookSdk;
+
 import com.firebase.client.Firebase;
 
 import java.sql.Time;
@@ -48,15 +49,20 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
+
+
 public class MakeReservation extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, TimePickerDialog.OnTimeSetListener, DatePickerDialog.OnDateSetListener {
 
     TextView rdate,rtime,wait_time, rname;
     Firebase myFirebaseRef;
-    String name,email,phone,pushID;
+    String name,email,phone,pushID,rName,genTime;
     int party,year, month,day,hour,minute,code;
     static final int REQUEST_SEND_SMS = 1;
     private CountDownTimer countDownTimer;
     LinearLayout layout_timer;
+    Button share;
+
+
 
     private static String[] PERMISSIONS_STORAGE = {
             Manifest.permission.SEND_SMS
@@ -96,31 +102,57 @@ public class MakeReservation extends AppCompatActivity implements NavigationView
         setContentView(R.layout.activity_make_reservation);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        setTitle("Make Reservation");
+        FacebookSdk.sdkInitialize(getApplicationContext());
+
+
+        String time = new SimpleDateFormat("MMM-dd-yyyy HH:mm").format(new Date());
+        genTime = String.valueOf(time);
 
         //map elements
+        share = (Button) findViewById((R.id.btn_share));
         rdate = (TextView) findViewById(R.id.date);
         rtime = (TextView) findViewById(R.id.time);
         wait_time = (TextView) findViewById(R.id.text_timer);
         rname = (TextView) findViewById(R.id.text_rname);
 
+        share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent sendIntent = new Intent();
+                sendIntent.setAction(Intent.ACTION_SEND);
+                sendIntent.putExtra(Intent.EXTRA_TEXT, "This is my text to send.");
+                sendIntent.setType("text/plain");
+                startActivity(sendIntent);
+
+            }
+        });
+
+
+
+
         int timer=0;
 
         Intent in = getIntent();
-        String res_name =  in.getStringExtra("res_name");
+        final String res_name =  in.getStringExtra("res_name");
         String res_time = in.getStringExtra("res_time");
+        final String waittime = in.getStringExtra("waittime");
+
 
         DateFormat df = new SimpleDateFormat("MMM dd, yyyy");
         String now = df.format(new Date());
 
         rname.setText(res_name);
 
+        rName = rname.getText().toString();
         if(res_time!=null){
             rdate.setText(now);
             rtime.setText(res_time);
         }
 
-        final String waittime = in.getStringExtra("waittime");
         if(waittime!=null) {
+            rdate.setText(now);
+            rtime.setText(res_time);
             timer = Integer.parseInt(waittime);
         }
 
@@ -148,7 +180,6 @@ public class MakeReservation extends AppCompatActivity implements NavigationView
             }.start();
         }
 
-        setTitle("Make Reservation");
 
         Button pickTime = (Button) findViewById(R.id.pickTime);
         pickTime.setOnClickListener(new View.OnClickListener() {
@@ -221,7 +252,7 @@ public class MakeReservation extends AppCompatActivity implements NavigationView
                     Firebase.setAndroidContext(MakeReservation.this);
                     myFirebaseRef = new Firebase("https://resplendent-heat-2353.firebaseio.com/Reservations");
                     Firebase resRef = myFirebaseRef.push();
-                    Reservation myRes = new Reservation(name, email, phone, party, year, month, day, hour, minute);
+                    Reservation myRes = new Reservation(name, email, phone, party, year, month, day, hour, minute,rName,genTime);
                     resRef.setValue(myRes);
                     pushID = resRef.getKey();
                     Toast.makeText(getApplicationContext(), "Your reservation has been confirmed.", Toast.LENGTH_SHORT).show();
@@ -293,7 +324,9 @@ public class MakeReservation extends AppCompatActivity implements NavigationView
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.nav_reserveTable) {
+            Intent in = new Intent(getApplicationContext(), Main_Activity.class);
+            startActivity(in);
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
 
@@ -333,7 +366,14 @@ public class MakeReservation extends AppCompatActivity implements NavigationView
     public void onTimeSet(TimePicker view, int hour, int minutes) {
         this.hour = hour;
         this.minute = minutes;
-        rtime.setText(hour +":"+ minutes);
+        String hr,min;
+        if(hour<10)hr = "0" + String.valueOf(hour);
+        else hr = String.valueOf(hour);
+
+        if(minutes<10)min = "0" + String.valueOf(minutes);
+        else min = String.valueOf(minutes);
+
+        rtime.setText(hr + ":" + min);
 
     }
 
@@ -342,7 +382,8 @@ public class MakeReservation extends AppCompatActivity implements NavigationView
         this.year = year;
         this.month = month;
         this.day = day;
-        rdate.setText(month +"-"+ day +"-"+ year);
+        rdate.setText(month + "-" + day + "-" + year);
     }
+
 
 }

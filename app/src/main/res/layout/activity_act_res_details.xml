@@ -43,15 +43,15 @@
 
         <include layout="@layout/content_act_res_details" />
 
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/fab_margin"
-            android:baselineAlignBottom="false"
-            android:src="@android:drawable/ic_dialog_email"
-            app:layout_anchor="@id/app_bar"
-            app:layout_anchorGravity="bottom|end" />
+        <!--<android.support.design.widget.FloatingActionButton-->
+            <!--android:id="@+id/fab"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_margin="@dimen/fab_margin"-->
+            <!--android:baselineAlignBottom="false"-->
+            <!--android:src="@android:drawable/ic_dialog_email"-->
+            <!--app:layout_anchor="@id/app_bar"-->
+            <!--app:layout_anchorGravity="bottom|end" />-->
     </android.support.design.widget.CoordinatorLayout>
 
         <android.support.design.widget.NavigationView

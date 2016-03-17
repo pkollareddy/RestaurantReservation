@@ -7,6 +7,7 @@
 6. Reservations can be made with name, phone number, email, time/date
 7. Reservation is confirmed through verificaiton code sent by text
 8. Verifying adds reservation to Firebase and shows user a notification
+Milestone 1 submission
 9. Firebase push() is used to generate unique keys for each restaurant/reservation
 10. Push objects to Firebase to automatically store a class of data
 11. Use location services and Google Maps API
@@ -18,6 +19,14 @@
 17. Navigation bar added with several endpoints
 18. Reservations can be searched through using a phone number
 19. Separate Restaurant apk has been started to compliment the Reservation app
+Milestone 2 submission
+20. Change current reservation enabled
+21. View invoice in pdf viewer of previous reservation
+22. Write a review of previous reservation
+23. Loading page enabled
+24. Reservation details can be shared with third party applications
+25. My account can change user info and preferences
+26. Sharing on facebook
 
 Sources:
 http://stackoverflow.com/

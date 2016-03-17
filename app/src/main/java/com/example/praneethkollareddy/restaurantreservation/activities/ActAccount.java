@@ -1,5 +1,6 @@
 package com.example.praneethkollareddy.restaurantreservation.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -14,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.praneethkollareddy.restaurantreservation.R;
 
@@ -30,14 +32,7 @@ public class ActAccount extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+
 
 
         cell = (EditText) findViewById(R.id.edit_accText);
@@ -51,10 +46,6 @@ public class ActAccount extends AppCompatActivity
         });
 
 
-
-
-
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -63,6 +54,9 @@ public class ActAccount extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+
+
     }
 
     @Override
@@ -75,10 +69,11 @@ public class ActAccount extends AppCompatActivity
         }
     }
 
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.act_account, menu);
+        getMenuInflater().inflate(R.menu.main_, menu);
         return true;
     }
 
@@ -91,6 +86,13 @@ public class ActAccount extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+
+            return true;
+        }
+
+        if (id == R.id.add_res) {
+            Intent in = new Intent(getApplicationContext(), AddRes.class);
+            startActivity(in);
             return true;
         }
 
@@ -98,18 +100,26 @@ public class ActAccount extends AppCompatActivity
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
+
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        if (id == R.id.nav_reserveTable) {
+            Intent in = new Intent(getApplicationContext(), Main_Activity.class);
+            startActivity(in);
+        } else if (id == R.id.nav_writeReview) {
+            Intent in = new Intent(getApplicationContext(), ActMyReservations.class);
+            startActivity(in);
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.nav_myReservations) {
+            Intent in = new Intent(getApplicationContext(), ActMyReservations.class);
+            startActivity(in);
 
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.nav_myAccount) {
+            Intent in = new Intent(getApplicationContext(), ActAccount.class);
+            startActivity(in);
 
         } else if (id == R.id.nav_share) {
 

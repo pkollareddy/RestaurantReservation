@@ -7,10 +7,12 @@ import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.example.praneethkollareddy.restaurantreservation.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -56,6 +58,8 @@ public class MapsActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         Intent in = getIntent();
         lat = in.getStringExtra("latitude");
@@ -69,7 +73,29 @@ public class MapsActivity extends AppCompatActivity implements NavigationView.On
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
         mMap.animateCamera(CameraUpdateFactory.zoomTo(13));
 
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.setDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+
+
+
     }
+
+    @Override
+    public void onBackPressed() {
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
+    }
+
 
 
     @Override
@@ -116,15 +142,17 @@ public class MapsActivity extends AppCompatActivity implements NavigationView.On
         if (id == R.id.nav_reserveTable) {
             Intent in = new Intent(getApplicationContext(), Main_Activity.class);
             startActivity(in);
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_reservations) {
+        } else if (id == R.id.nav_writeReview) {
             Intent in = new Intent(getApplicationContext(), ActMyReservations.class);
             startActivity(in);
 
-        } else if (id == R.id.nav_settings) {
+        } else if (id == R.id.nav_myReservations) {
+            Intent in = new Intent(getApplicationContext(), ActMyReservations.class);
+            startActivity(in);
 
+        } else if (id == R.id.nav_myAccount) {
+            Intent in = new Intent(getApplicationContext(), ActAccount.class);
+            startActivity(in);
 
         } else if (id == R.id.nav_share) {
 

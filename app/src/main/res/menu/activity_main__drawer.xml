@@ -7,21 +7,17 @@
             android:icon="@drawable/ic_menu_camera"
             android:title="Reserve a table" />
         <item
-            android:id="@+id/nav_gallery"
+            android:id="@+id/nav_writeReview"
             android:icon="@drawable/ic_menu_gallery"
             android:title="Write a review" />
         <item
-            android:id="@+id/nav_reservations"
+            android:id="@+id/nav_myReservations"
             android:icon="@drawable/ic_menu_slideshow"
             android:title="My Reservations" />
         <item
-            android:id="@+id/nav_settings"
+            android:id="@+id/nav_myAccount"
             android:icon="@drawable/ic_menu_manage"
-            android:title="Settings" />
-        <item
-            android:id="@+id/nav_account"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Account" />
+            android:title="Account Settings" />
 
     </group>
 

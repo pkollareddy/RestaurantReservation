@@ -45,7 +45,7 @@ public class Main_Activity extends AppCompatActivity
     public static String Latitude = "37", Longitude = "-121";
     public static Location myLoc = new Location(LocationManager.NETWORK_PROVIDER);
     public static GoogleMap googleMap;
-    public static String rName,rWaittime;
+    public static String rName, rWaittime;
 
     public String res_key;
     ListView res_list;
@@ -187,23 +187,21 @@ public class Main_Activity extends AppCompatActivity
 
         if (id == R.id.nav_reserveTable) {
             // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_reservations) {
+        } else if (id == R.id.nav_writeReview) {
             Intent in = new Intent(getApplicationContext(), ActMyReservations.class);
             startActivity(in);
 
-        } else if (id == R.id.nav_settings) {
+        } else if (id == R.id.nav_myReservations) {
+            Intent in = new Intent(getApplicationContext(), ActMyReservations.class);
+            startActivity(in);
 
+        } else if (id == R.id.nav_myAccount) {
+            Intent in = new Intent(getApplicationContext(), ActAccount.class);
+            startActivity(in);
 
         } else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {
-
-        }
-        else if (id == R.id.nav_account) {
-            Intent in = new Intent(getApplicationContext(), ActAccount.class);
-            startActivity(in);
 
         }
 

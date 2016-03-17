@@ -8,10 +8,16 @@
         app:showAsAction="never" />
 
     <item
+        android:orderInCategory="101"
+        android:title="Clear search history"
+        app:showAsAction="never" />
+
+    <item
         android:id="@+id/add_res"
         android:orderInCategory="101"
         android:title="Add Restaurant"
         app:showAsAction="never" />
+
 
 
 </menu>

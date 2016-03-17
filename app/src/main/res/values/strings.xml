@@ -5,6 +5,8 @@
     <string name="title_add_res">Add new Restaurant</string>
     <string name="title_add_res_details">Restaurant Name</string>
     <string name="title_make_reservation">Make a reservation</string>
+    <string name="title_activity_maps">Location</string>
+    <string name="title_activity_act_account">My Account</string>
 
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -57,8 +59,6 @@ Reserve has access to great tables because we give our restaurant partners peace
         <item>Item 5</item>
         <item>Item 6</item>
     </string-array>
-    <string name="title_activity_maps">Map</string>
-    <string name="title_activity_act_account">ActAccount</string>
 
 
 </resources>

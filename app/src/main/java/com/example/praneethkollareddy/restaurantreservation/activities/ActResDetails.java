@@ -207,15 +207,6 @@ public class ActResDetails extends AppCompatActivity implements NavigationView.O
         });
 
 
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
-
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -279,14 +270,16 @@ public class ActResDetails extends AppCompatActivity implements NavigationView.O
             Intent in = new Intent(getApplicationContext(), Main_Activity.class);
             startActivity(in);
             // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_reservations) {
+        } else if (id == R.id.nav_myAccount) {
+            Intent in = new Intent(getApplicationContext(), ActAccount.class);
+            startActivity(in);
+        } else if (id == R.id.nav_myReservations) {
             Intent in = new Intent(getApplicationContext(), ActMyReservations.class);
             startActivity(in);
 
-        } else if (id == R.id.nav_settings) {
-
+        } else if (id == R.id.nav_writeReview) {
+            Intent in = new Intent(getApplicationContext(), ActMyReservations.class);
+            startActivity(in);
 
         } else if (id == R.id.nav_share) {
 
@@ -329,12 +322,6 @@ public class ActResDetails extends AppCompatActivity implements NavigationView.O
 
                             address.setText(add);
                             resLoc = new LatLng(Double.parseDouble(resData.getLatitude()),Double.parseDouble(resData.getLongitude()));
-
-
-
-
-
-
                         } else {
 
                         }

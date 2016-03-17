@@ -13,6 +13,7 @@ import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.design.widget.NavigationView;
@@ -30,6 +31,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -39,9 +41,15 @@ import com.example.praneethkollareddy.restaurantreservation.databeans.Reservatio
 import com.example.praneethkollareddy.restaurantreservation.fragments.ReservationDatePickerFragment;
 import com.example.praneethkollareddy.restaurantreservation.fragments.ReservationTimePickerFragment;
 import com.example.praneethkollareddy.restaurantreservation.receivers.DelayedNotif;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
 import com.facebook.FacebookDialog;
+import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
 
+import com.facebook.share.Sharer;
+import com.facebook.share.model.ShareLinkContent;
+import com.facebook.share.widget.ShareDialog;
 import com.firebase.client.Firebase;
 
 import java.sql.Time;
@@ -63,6 +71,8 @@ public class MakeReservation extends AppCompatActivity implements NavigationView
     private CountDownTimer countDownTimer;
     LinearLayout layout_timer;
     Button share;
+    ShareDialog shareDialog;
+    Switch facebook;
 
 
 
@@ -107,28 +117,37 @@ public class MakeReservation extends AppCompatActivity implements NavigationView
         setTitle("Make Reservation");
         FacebookSdk.sdkInitialize(getApplicationContext());
 
+        shareDialog = new ShareDialog(this);
+        CallbackManager callbackManager = CallbackManager.Factory.create();
+        shareDialog.registerCallback(callbackManager, new
+
+                FacebookCallback<Sharer.Result>() {
+                    @Override
+                    public void onSuccess(Sharer.Result result) {
+                    }
+
+                    @Override
+                    public void onCancel() {
+                    }
+
+                    @Override
+                    public void onError(FacebookException error) {
+                    }
+                });
+
 
         String time = new SimpleDateFormat("MMM-dd-yyyy HH:mm").format(new Date());
         genTime = String.valueOf(time);
 
         //map elements
-        share = (Button) findViewById((R.id.btn_share));
+        facebook = (Switch) findViewById((R.id.switch_facebook));
         rdate = (TextView) findViewById(R.id.date);
         rtime = (TextView) findViewById(R.id.time);
         wait_time = (TextView) findViewById(R.id.text_timer);
         rname = (TextView) findViewById(R.id.text_rname);
 
-        share.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent sendIntent = new Intent();
-                sendIntent.setAction(Intent.ACTION_SEND);
-                sendIntent.putExtra(Intent.EXTRA_TEXT, "This is my text to send.");
-                sendIntent.setType("text/plain");
-                startActivity(sendIntent);
 
-            }
-        });
+
 
 
 
@@ -215,17 +234,17 @@ public class MakeReservation extends AppCompatActivity implements NavigationView
                 EditText partyField = (EditText) findViewById(R.id.enterParty);
                 party = Integer.parseInt(partyField.getText().toString());
 
-                if(name != null && email !=null && phone != null && party != 0) {
-                    if(!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                if (name != null && email != null && phone != null && party != 0) {
+                    if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
                         Toast.makeText(getApplicationContext(), "Please enter a valid email.", Toast.LENGTH_SHORT).show();
-                    }else if(!android.util.Patterns.PHONE.matcher(phone).matches()) {
+                    } else if (!android.util.Patterns.PHONE.matcher(phone).matches()) {
                         Toast.makeText(getApplicationContext(), "Please enter a valid phone number.", Toast.LENGTH_SHORT).show();
-                    }else if(party > 10) {
+                    } else if (party > 10) {
                         Toast.makeText(getApplicationContext(), "We can not take reservations for over 10 people. Please call the restaurant.", Toast.LENGTH_LONG).show();
                     } else {
                         verifyStoragePermissions(MakeReservation.this);
                         SmsManager smsManager = SmsManager.getDefault();
-                        code = (int)(Math.random()*100001) + 1;
+                        code = (int) (Math.random() * 100001) + 1;
                         System.out.println("This is the verification code: " + code);
                         smsManager.sendTextMessage(phone, null, String.valueOf(code), null, null);
                         Toast.makeText(getApplicationContext(), "Verification code has been sent.", Toast.LENGTH_SHORT).show();
@@ -254,7 +273,7 @@ public class MakeReservation extends AppCompatActivity implements NavigationView
                     Firebase.setAndroidContext(MakeReservation.this);
                     myFirebaseRef = new Firebase("https://resplendent-heat-2353.firebaseio.com/Reservations");
                     Firebase resRef = myFirebaseRef.push();
-                    Reservation myRes = new Reservation(name, email, phone, party, year, month, day, hour, minute,rName,genTime);
+                    Reservation myRes = new Reservation(name, email, phone, party, year, month, day, hour, minute, rName, genTime);
                     resRef.setValue(myRes);
                     pushID = resRef.getKey();
                     Toast.makeText(getApplicationContext(), "Your reservation has been confirmed.", Toast.LENGTH_SHORT).show();
@@ -272,23 +291,47 @@ public class MakeReservation extends AppCompatActivity implements NavigationView
                         Context.NOTIFICATION_SERVICE);
                 notificationManager.notify(id, notification);
 
-                Intent myIntent = new Intent(MakeReservation.this , DelayedNotif.class);
-                AlarmManager alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
+                Intent myIntent = new Intent(MakeReservation.this, DelayedNotif.class);
+                AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
                 PendingIntent pendingIntent = PendingIntent.getBroadcast(MakeReservation.this, 0, myIntent, 0);
 
                 Calendar calendar = Calendar.getInstance();
                 calendar.set(Calendar.YEAR, year);
                 calendar.set(Calendar.MONTH, month);
                 calendar.set(Calendar.DAY_OF_MONTH, day);
-                calendar.set(Calendar.HOUR_OF_DAY, hour-2);
+                calendar.set(Calendar.HOUR_OF_DAY, hour - 2);
                 calendar.set(Calendar.MINUTE, minute);
 
                 System.out.println("sound the alarm");
                 alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
                 System.out.println("alarm sounded");
+
+
+                if(facebook.isChecked())
+                {
+                    if (ShareDialog.canShow(ShareLinkContent.class)) {
+                        ShareLinkContent linkContent = new ShareLinkContent.Builder()
+                                .setContentTitle("Yay I got my table at " +res_name)
+                                .setContentDescription("Yolo people get your table reserved from this amazing new app")
+
+                                .setContentUrl(Uri.parse("http://www.yelp.com/san-jose"))
+                                .build();
+
+                        shareDialog.show(linkContent);
+                    }
+
+                }
                 finish();
+
+
+
             }
         });
+
+
+
+
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(

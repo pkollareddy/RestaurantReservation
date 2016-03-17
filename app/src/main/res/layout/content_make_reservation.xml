@@ -249,14 +249,7 @@
                             android:visibility="invisible" />
                     </LinearLayout>
 
-                    <Button
-                        android:id="@+id/saveButton"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@color/colorPrimaryDark"
-                        android:enabled="false"
-                        android:text="@string/save_button"
-                        android:textColor="@color/colorWhite" />
+
                 </LinearLayout>
 
 
@@ -267,6 +260,7 @@
                     android:background="@color/colorWhite"
                     android:orientation="vertical"
                     android:padding="5dp">
+
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -285,7 +279,9 @@
                             android:layout_gravity="right" />
 
 
+
                     </LinearLayout>
+
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -301,16 +297,22 @@
                         <Switch
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="right" />
+                            android:layout_gravity="right"
+                            android:id="@+id/switch_facebook"/>
 
 
                     </LinearLayout>
-                    <Button
-                        android:id="@+id/btn_share"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="share" />
 
+
+                    <Button
+                        android:id="@+id/saveButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/colorPrimaryDark"
+                        android:enabled="false"
+                        android:text="@string/save_button"
+                        android:layout_marginTop="5dp"
+                        android:textColor="@color/colorWhite" />
 
                 </LinearLayout>
 

@@ -114,10 +114,7 @@ public class ReservationListAdapter extends ArrayAdapter<Reservation> {
             viewHolder = (ViewHolder) row.getTag();
         }
 
-        if(reservation.getDay()>20) {
 
-            viewHolder.rsv_layout.setBackgroundColor(Color.parseColor("#FF4081"));
-        }
         viewHolder.share.setTag(position);
         viewHolder.share.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -238,6 +235,8 @@ public class ReservationListAdapter extends ArrayAdapter<Reservation> {
         if (daynow > reservation.getDay()) {
             viewHolder.changeReservation.setVisibility(View.GONE);
             viewHolder.viewReservation.setVisibility(View.VISIBLE);
+            viewHolder.rsv_layout.setBackgroundColor(Color.parseColor("#b90000"));
+
         } else {
             viewHolder.changeReservation.setVisibility(View.VISIBLE);
             viewHolder.viewReservation.setVisibility(View.GONE);

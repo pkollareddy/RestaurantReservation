@@ -207,15 +207,6 @@ public class ActResDetails extends AppCompatActivity implements NavigationView.O
         });
 
 
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
-
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -331,12 +322,6 @@ public class ActResDetails extends AppCompatActivity implements NavigationView.O
 
                             address.setText(add);
                             resLoc = new LatLng(Double.parseDouble(resData.getLatitude()),Double.parseDouble(resData.getLongitude()));
-
-
-
-
-
-
                         } else {
 
                         }

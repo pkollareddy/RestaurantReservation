@@ -55,7 +55,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Preferences"
-            android:textColor="@color/colorBlack"
+            android:textColor="@color/colorPrimaryDark"
             android:layout_marginTop="10dp"/>
 
 
@@ -64,16 +64,15 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center_vertical"
-            android:padding="5dp">
+            >
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Distance in "
+                android:text="Distance unit"
                 android:textColor="@color/colorBlack"
-                android:layout_margin="10dp"
                 android:layout_weight="1"
-                android:layout_gravity="left"
-                />
+                android:textSize="15dp"
+                android:layout_gravity="center" />
 
             <RadioGroup
                 android:layout_width="wrap_content"
@@ -95,6 +94,105 @@
 
 
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Share on Facebook"
+                android:textSize="15dp"
+
+                android:textColor="@color/colorBlack"
+                android:layout_weight="1"
+
+                android:layout_gravity="center" />
+
+            <Switch
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Allow restaurants to call"
+                android:textSize="15dp"
+
+                android:textColor="@color/colorBlack"
+                android:layout_weight="1"
+
+                android:layout_gravity="center" />
+
+            <Switch
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Notifications"
+                android:textSize="15dp"
+
+                android:textColor="@color/colorBlack"
+                android:layout_weight="1"
+
+                android:layout_gravity="center" />
+
+            <Switch
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                />
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Reservation reminder"
+                android:textSize="15dp"
+
+                android:textColor="@color/colorBlack"
+                android:layout_weight="1"
+
+                android:layout_gravity="center" />
+
+            <Switch
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:textOn="On"
+                />
+        </LinearLayout>
     </LinearLayout>
 
 

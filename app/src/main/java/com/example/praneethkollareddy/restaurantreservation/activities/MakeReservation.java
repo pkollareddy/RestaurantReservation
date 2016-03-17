@@ -299,7 +299,6 @@ public class MakeReservation extends AppCompatActivity implements NavigationView
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        Toast.makeText(getApplicationContext(), "Finding you current location...", Toast.LENGTH_LONG).show();
 
 
     }

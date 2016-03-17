@@ -32,9 +32,7 @@
         <activity
             android:name=".activities.Main_Activity"
             android:label="@string/title_activity_main_"
-            android:theme="@style/AppTheme.NoActionBar">
-
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".activities.AddRes"
             android:label="@string/title_add_res"
@@ -87,7 +85,8 @@
             android:name=".activities.ActAccount"
             android:label="@string/title_activity_act_account"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".activities.LoadingPage"
+        <activity
+            android:name=".activities.LoadingPage"
             android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -95,6 +94,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".activities.MyCart"></activity>
     </application>
 
 </manifest>

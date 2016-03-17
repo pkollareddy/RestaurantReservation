@@ -1,6 +1,8 @@
 package com.example.praneethkollareddy.restaurantreservation.activities;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -20,6 +22,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.praneethkollareddy.restaurantreservation.R;
@@ -35,25 +39,20 @@ public class ActOrder extends AppCompatActivity implements NavigationView.OnNavi
      * {@link android.support.v4.app.FragmentStatePagerAdapter}.
      */
     private SectionsPagerAdapter mSectionsPagerAdapter;
-    String[] items;
+    static int[][] items = new int[3][6];
 
     /**
      * The {@link ViewPager} that will host the section contents.
      */
     private ViewPager mViewPager;
 
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_act_order);
-
-
-
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
@@ -65,6 +64,17 @@ public class ActOrder extends AppCompatActivity implements NavigationView.OnNavi
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
 
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent mIntent = new Intent(ActOrder.this, MyCart.class);
+                Bundle mBundle = new Bundle();
+                mBundle.putSerializable("myCart", items);
+                mIntent.putExtras(mBundle);
+                startActivity(mIntent);
+            }
+        });
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -105,7 +115,6 @@ public class ActOrder extends AppCompatActivity implements NavigationView.OnNavi
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-
             return true;
         }
 
@@ -162,8 +171,7 @@ public class ActOrder extends AppCompatActivity implements NavigationView.OnNavi
         private static final String ARG_SECTION_NUMBER = "section_number";
 
 
-        public PlaceholderFragment() {
-        }
+        public PlaceholderFragment() {}
 
         /**
          * Returns a new instance of this fragment for the given section
@@ -178,11 +186,20 @@ public class ActOrder extends AppCompatActivity implements NavigationView.OnNavi
         }
 
         @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
+        public View onCreateView(LayoutInflater inflater, ViewGroup container, final Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_act_order, container, false);
+            ListView itemlist = (ListView) rootView.findViewById(R.id.listView);
+            final ViewGroup viewGroup = container;
 
+            itemlist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    parent.getAdapter().getView(position, view, viewGroup).setBackgroundColor(Color.GREEN);
+                    Bundle myBundle = getArguments();
+                    items[myBundle.getInt(ARG_SECTION_NUMBER)-1][position] = 1;
 
+                }
+            });
             return rootView;
         }
     }

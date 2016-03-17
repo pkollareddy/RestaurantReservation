@@ -16,6 +16,9 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.praneethkollareddy.restaurantreservation.R;
 import com.example.praneethkollareddy.restaurantreservation.databeans.Reservation;
@@ -24,7 +27,14 @@ import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
+import com.example.praneethkollareddy.restaurantreservation.adapters.ReservationListAdapter;
+import com.firebase.client.DataSnapshot;
+import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
+import com.firebase.client.ValueEventListener;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ArrayList;
 import java.util.List;
 

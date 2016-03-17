@@ -8,7 +8,6 @@
     <string name="title_activity_maps">Location</string>
     <string name="title_activity_act_account">My Account</string>
 
-
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="name_prompt">Name</string>
@@ -24,7 +23,6 @@
     <string name="title_activity_act_my_reservations">My Reservations</string>
     <string name="title_activity_act_order">Menu</string>
     <string name="section_format">Hello World from section: %1$d</string>
-    <string name="search_reservations">Enter your number:</string>
 
 
     //fragment strings
@@ -41,17 +39,23 @@ Reserve has access to great tables because we give our restaurant partners peace
 
     <string name="ok">OK</string>
     <string name="facebook_app_id">1581720592145936</string>
+    <string name="cart_title">These items are in your cart.</string>
+    <string name="non_veg">Non Vegetarian Options</string>
+    <string name="veg">Vegetarian Options</string>
+    <string name="drink">Drinks</string>
+
+
 
     facebook_app_id
 
 
     <string-array name="menuList">
-        <item>Item A</item>
-        <item>Item B</item>
-        <item>Item C</item>
-        <item>Item D</item>
-        <item>Item E</item>
-        <item>Item F</item>
+        <item>Item 1</item>
+        <item>Item 2</item>
+        <item>Item 3</item>
+        <item>Item 4</item>
+        <item>Item 5</item>
+        <item>Item 6</item>
     </string-array>
 
 

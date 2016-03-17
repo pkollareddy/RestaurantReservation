@@ -13,6 +13,8 @@ import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -22,6 +24,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.NotificationCompat;
 import android.support.v7.widget.Toolbar;
 import android.telephony.SmsManager;
 import android.view.Menu;
@@ -282,15 +285,27 @@ public class MakeReservation extends AppCompatActivity implements NavigationView
 
                 int id = 12345;
 
-                Notification notification = new Notification.Builder(MakeReservation.this)
+                Notification.Builder notification = new Notification.Builder(MakeReservation.this)
                         .setContentTitle("Restaurant Reservation")
-                        .setContentText("Your reservation has been made.")
-                        .setSmallIcon(android.R.drawable.ic_menu_day)
-                        .build();
+                        .setContentText("Your reservation at " + res_name + " for " + party + "has been made.")
+                        .setSmallIcon(R.drawable.logo);
+
+                Intent notificationIntent = new Intent(getApplicationContext(), ActMyReservations.class);
+
+                PendingIntent contentIntent = PendingIntent.getActivity(getApplicationContext(), 0, notificationIntent,
+                        PendingIntent.FLAG_UPDATE_CURRENT);
+
+                notification.setContentIntent(contentIntent);
+                notification.setAutoCancel(true);
+                notification.setLights(Color.BLUE, 500, 500);
+                long[] pattern = {500,500,500,500,500,500,500,500,500};
+                notification.setVibrate(pattern);
+                Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+                notification.setSound(alarmSound);
 
                 NotificationManager notificationManager = (NotificationManager) getSystemService(
                         Context.NOTIFICATION_SERVICE);
-                notificationManager.notify(id, notification);
+                notificationManager.notify(id, notification.build());
 
                 Intent myIntent = new Intent(MakeReservation.this, DelayedNotif.class);
                 AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);

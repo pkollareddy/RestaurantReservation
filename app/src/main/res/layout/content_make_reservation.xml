@@ -147,7 +147,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:ems="12"
-                        android:inputType="textPersonName" />
+                        android:inputType="textPersonName"
+                        android:text="Manroop Singh"/>
 
                     <TextView
                         android:id="@+id/partyPrompt"
@@ -182,7 +183,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:ems="9"
-                        android:inputType="textEmailAddress" />
+                        android:inputType="textEmailAddress"
+                        android:text="singh@manroop.com"/>
 
                     <TextView
                         android:id="@+id/phonePrompt"
@@ -196,7 +198,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:ems="10"
-                        android:inputType="phone" />
+                        android:inputType="phone"
+                        android:text="6508669800"/>
 
                 </LinearLayout>
 

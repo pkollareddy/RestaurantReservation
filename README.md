@@ -29,6 +29,6 @@ Milestone 2 submission
 26. Sharing on facebook
 
 Sources:
-http://stackoverflow.com/
-http://developer.android.com/
+http://stackoverflow.com/, 
+http://developer.android.com/, 
 https://www.firebase.com/docs/

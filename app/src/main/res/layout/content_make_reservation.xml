@@ -148,7 +148,7 @@
                         android:layout_height="wrap_content"
                         android:ems="12"
                         android:inputType="textPersonName"
-                        android:text="Manroop Singh"/>
+                        android:text="Manroop Singh" />
 
                     <TextView
                         android:id="@+id/partyPrompt"
@@ -184,7 +184,7 @@
                         android:layout_height="wrap_content"
                         android:ems="9"
                         android:inputType="textEmailAddress"
-                        android:text="singh@manroop.com"/>
+                        android:text="singh@manroop.com" />
 
                     <TextView
                         android:id="@+id/phonePrompt"
@@ -199,7 +199,7 @@
                         android:layout_height="wrap_content"
                         android:ems="10"
                         android:inputType="phone"
-                        android:text="6508669800"/>
+                        android:text="6508669800" />
 
                 </LinearLayout>
 
@@ -229,28 +229,17 @@
                         android:layout_gravity="center"
                         android:text="@string/confirm_human" />
 
-                    <LinearLayout
+
+                    <EditText
+                        android:id="@+id/enterCode"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:id="@+id/codePrompt"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/enter_code"
-                            android:textSize="16sp"
-                            android:visibility="invisible" />
-
-                        <EditText
-                            android:id="@+id/enterCode"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:ems="5"
-                            android:enabled="false"
-                            android:inputType="number"
-                            android:visibility="invisible" />
-                    </LinearLayout>
+                        android:layout_gravity="center"
+                        android:ems="8"
+                        android:enabled="false"
+                        android:hint="Enter code here"
+                        android:inputType="number"
+                        android:visibility="invisible" />
 
 
                 </LinearLayout>
@@ -282,7 +271,6 @@
                             android:layout_gravity="right" />
 
 
-
                     </LinearLayout>
 
 
@@ -298,10 +286,10 @@
                             android:text="Share on Facebook" />
 
                         <Switch
+                            android:id="@+id/switch_facebook"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="right"
-                            android:id="@+id/switch_facebook"/>
+                            android:layout_gravity="right" />
 
 
                     </LinearLayout>
@@ -311,10 +299,10 @@
                         android:id="@+id/saveButton"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
                         android:background="@color/colorPrimaryDark"
                         android:enabled="false"
                         android:text="@string/save_button"
-                        android:layout_marginTop="5dp"
                         android:textColor="@color/colorWhite" />
 
                 </LinearLayout>

@@ -258,8 +258,6 @@ public class MakeReservation extends AppCompatActivity implements NavigationView
                         partyField.setKeyListener(null);
                         Button saveButton = (Button) findViewById(R.id.saveButton);
                         saveButton.setEnabled(true);
-                        TextView codePrompt = (TextView) findViewById(R.id.codePrompt);
-                        codePrompt.setVisibility(View.VISIBLE);
                         EditText enterCode = (EditText) findViewById(R.id.enterCode);
                         enterCode.setVisibility(View.VISIBLE);
                         enterCode.setEnabled(true);

@@ -21,6 +21,7 @@ public class DelayedNotif extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         System.out.println("in da receiver");
 
+
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(
                 context).setSmallIcon(R.drawable.logo)
                 .setContentTitle("Restaurant Reservation")
@@ -40,7 +41,6 @@ public class DelayedNotif extends BroadcastReceiver {
         mBuilder.setVibrate(pattern);
         Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         mBuilder.setSound(alarmSound);
-
 
         NotificationManager manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         manager.notify(0, mBuilder.build());

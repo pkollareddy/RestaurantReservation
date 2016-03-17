@@ -194,10 +194,14 @@ public class ActOrder extends AppCompatActivity implements NavigationView.OnNavi
             itemlist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    parent.getAdapter().getView(position, view, viewGroup).setBackgroundColor(Color.GREEN);
                     Bundle myBundle = getArguments();
-                    items[myBundle.getInt(ARG_SECTION_NUMBER)-1][position] = 1;
-
+                    if (items[myBundle.getInt(ARG_SECTION_NUMBER)-1][position] == 1) {
+                        parent.getAdapter().getView(position, view, viewGroup).setBackgroundColor(Color.TRANSPARENT);
+                        items[myBundle.getInt(ARG_SECTION_NUMBER)-1][position] = 0;
+                    } else {
+                        parent.getAdapter().getView(position, view, viewGroup).setBackgroundColor(Color.GREEN);
+                        items[myBundle.getInt(ARG_SECTION_NUMBER)-1][position] = 1;
+                    }
                 }
             });
             return rootView;

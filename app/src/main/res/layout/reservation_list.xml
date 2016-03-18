@@ -2,303 +2,138 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:layout_marginTop="5dp">
+    android:layout_marginTop="5dp"
+    android:orientation="vertical">
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:background="@color/colorPrimaryDark"
-        android:padding="2dp"
-        android:id="@+id/layout_rsv">
-
-        <TextView
-            android:id="@+id/text_resName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/colorWhite"
-            android:layout_weight="1"
-            android:layout_gravity="left"
-            android:layout_marginLeft="4dp"
-            android:text="Restaurant name"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:id="@+id/text_genTime"
-            android:textColor="@color/colorWhite"
-            android:text="Generation time"/>
-
-    </LinearLayout>
+    //new layout
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorWhite"
-        android:orientation="vertical"
-        android:padding="4dp"
-
-        >
+        android:orientation="horizontal"
+        android:padding="6dp">
+        //date
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:orientation="horizontal">
+            android:orientation="vertical"
+            android:padding="3dp"
+            android:background="@color/colorLightRed">
 
             <TextView
+                android:id="@+id/text_rsvDay"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Under"
-                android:textColor="@color/colorBlack" />
+                android:text="15"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="25dp" />
 
             <TextView
-                android:id="@+id/text_reserveName"
+                android:id="@+id/text_rsvMonth"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:text="Manroop Singh"
-                android:textColor="@color/colorAccent" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:text="on"
-
-                android:textColor="@color/colorBlack" />
-
-            <TextView
-                android:id="@+id/text_reserveDate"
-
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:text="03, Mar 2016"
-                android:textColor="@color/colorAccent" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:text="at"
-
-                android:textColor="@color/colorBlack" />
-
-            <TextView
-                android:id="@+id/text_reserveTime"
-
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:text="18:34"
-                android:textColor="@color/colorAccent" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:text="for"
-
-                android:textColor="@color/colorBlack" />
-
-            <TextView
-                android:id="@+id/text_partySize"
-
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:text="18:34"
-                android:textColor="@color/colorAccent" />
+                android:text="MAR"
+                android:textColor="@color/colorMaroon" />
         </LinearLayout>
-
-        //layout change reservation
 
         <LinearLayout
-            android:id="@+id/layout_changeReservation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_gravity="center_vertical"
+            android:orientation="vertical"
+            android:padding="3dp">
+            //row1
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_marginLeft="5dp"
+                android:layout_weight="1">
 
-
-                <LinearLayout
+                <TextView
+                    android:id="@+id/text_rsvRname"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="left"
                     android:layout_weight="1"
-                    android:orientation="horizontal">
+                    android:text="Fiorillo's restaurant"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="18dp" />
 
-
-                    <TextView
-                        android:id="@+id/text_changeReservation"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:clickable="true"
-                        android:text="Change"
-
-                        android:textColor="@color/colorPrimaryDark" />
-
-                    <TextView
-                        android:id="@+id/text_cancelReservation"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:clickable="true"
-                        android:text="Cancel"
-
-                        android:textColor="@color/colorPrimaryDark" />
-                </LinearLayout>
-
-
-                <LinearLayout
+                <TextView
+                    android:id="@+id/text_rsvGenTime"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
-                    android:orientation="horizontal">
-
-
-                    <TextView
-                        android:id="@+id/text_orderFood"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:clickable="true"
-                        android:text="Order food"
-
-                        android:textColor="@color/colorPrimaryDark" />
-                </LinearLayout>
-
-
+                    android:text="Mar 12, 2016 15:24" />
             </LinearLayout>
+
+            //row2
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp">
 
-
-                <LinearLayout
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="left"
-                    android:layout_weight="1"
-                    android:orientation="horizontal">
+                    android:text="Table for"
+                    android:textColor="@color/colorDarkGray" />
 
-
-                    <TextView
-                        android:id="@+id/text_cancellationPolicy"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:clickable="true"
-                        android:text="Cancellation policy"
-                        android:textColor="@color/colorPrimaryDark" />
-                </LinearLayout>
-
-
-                <LinearLayout
+                <TextView
+                    android:id="@+id/text_rsvParty"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="right"
-                    android:orientation="horizontal">
+                    android:layout_marginLeft="3dp"
 
-                    <TextView
-                        android:id="@+id/text_share"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="40dp"
-                        android:clickable="true"
-                        android:text="Share"
-                        android:textColor="@color/colorPrimaryDark" />
+                    android:text="2"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="14dp" />
 
 
-                </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="2dp"
 
+                    android:text="at"
+                    android:textColor="@color/colorDarkGray" />
 
+                <TextView
+                    android:id="@+id/text_rsvTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="3dp"
+                    android:text="21:00"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="14dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="2dp"
+                    android:text="for"
+
+                    android:textColor="@color/colorDarkGray" />
+
+                <TextView
+                    android:id="@+id/text_rsvName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="3dp"
+
+                    android:text="Manroop Singh"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="14dp" />
             </LinearLayout>
-
 
         </LinearLayout>
 
-
-        //layout view reservation details
-
-        <LinearLayout
-            android:id="@+id/layout_viewReservation"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:orientation="vertical">
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"></LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="right"
-                    android:orientation="horizontal">
-
-
-                    <TextView
-                        android:id="@+id/text_viewInvoice"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="left"
-                        android:clickable="true"
-                        android:text="View Invoice"
-                        android:textColor="@color/colorMaroon" />
-                </LinearLayout>
-
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"></LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="right"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/text_writeReview"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="right"
-                        android:clickable="true"
-                        android:text="Write a review"
-                        android:textColor="@color/colorMaroon" />
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-
-        </LinearLayout>
 
     </LinearLayout>
 

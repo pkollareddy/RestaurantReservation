@@ -46,9 +46,6 @@ Reserve has access to great tables because we give our restaurant partners peace
 
 
 
-    facebook_app_id
-
-
     <string-array name="menuList">
         <item>Item 1</item>
         <item>Item 2</item>
@@ -57,6 +54,19 @@ Reserve has access to great tables because we give our restaurant partners peace
         <item>Item 5</item>
         <item>Item 6</item>
     </string-array>
+
+    <string-array name="options">
+        <item>Change</item>
+        <item>Cancel</item>
+        <item>Share</item>
+    </string-array>
+
+    <string-array name="options2">
+        <item>View invoice</item>
+        <item>Write a review</item>
+        <item>Share</item>
+    </string-array>
+
 
 
 </resources>

@@ -28,30 +28,30 @@
             <Button
 
                 android:id="@+id/btn_makeReservation"
-                android:layout_width="130dp"
-                android:layout_height="35dp"
+                android:layout_width="80dp"
+                android:layout_height="30dp"
                 android:layout_weight="0.15"
-                android:background="@color/colorMaroon"
+                android:background="@color/colorPrimaryDark"
                 android:focusable="false"
                 android:focusableInTouchMode="false"
                 android:scaleType="fitXY"
                 android:stateListAnimator="@null"
-                android:text="Make Reservation"
+                android:text="Reserve"
                 android:textColor="@color/colorWhite"
                 android:textSize="12dp" />
 
             <Button
                 android:id="@+id/btn_orderFood"
-                android:layout_width="130dp"
-                android:layout_height="35dp"
+                android:layout_width="80dp"
+                android:layout_height="30dp"
                 android:layout_marginLeft="10dp"
                 android:layout_weight="0.15"
-                android:background="@color/colorMaroon"
+                android:background="@color/colorPrimaryDark"
                 android:focusable="false"
                 android:focusableInTouchMode="false"
                 android:scaleType="fitXY"
                 android:stateListAnimator="@null"
-                android:text="Order Food"
+                android:text="Menu"
                 android:textColor="@color/colorWhite"
                 android:textSize="12dp" />
 

@@ -31,8 +31,8 @@ public class ReservationTimePickerFragment extends DialogFragment{
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         final Calendar c = Calendar.getInstance();
         int hour = c.get(Calendar.HOUR_OF_DAY);
-        int minute = c.get(Calendar.MINUTE);
+        int minute = c.get(Calendar.MINUTE)/15;
 
-        return new TimePickerDialog(getActivity(), mListener, hour, minute, DateFormat.is24HourFormat(getActivity()));
+        return new TimePickerDialog(getActivity(), mListener, hour, minute, false);
+        };
     }
-}

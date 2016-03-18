@@ -77,6 +77,9 @@ public class MakeReservation extends AppCompatActivity implements NavigationView
     Button share;
     ShareDialog shareDialog;
     Switch facebook;
+    int timer=0;
+    Calendar cl;
+
 
 
 
@@ -150,17 +153,9 @@ public class MakeReservation extends AppCompatActivity implements NavigationView
         wait_time = (TextView) findViewById(R.id.text_timer);
         rname = (TextView) findViewById(R.id.text_rname);
 
-
-
-
-
-
-
-        int timer=0;
-
         Intent in = getIntent();
         final String res_name =  in.getStringExtra("res_name");
-        String res_time = in.getStringExtra("res_time");
+        final String res_time = in.getStringExtra("res_time");
         final String waittime = in.getStringExtra("waittime");
 
 
@@ -169,17 +164,37 @@ public class MakeReservation extends AppCompatActivity implements NavigationView
 
         rname.setText(res_name);
 
+        cl = Calendar.getInstance();
+
+
+        cl.setTime(new Date());
+
+
+        day = cl.get(Calendar.DAY_OF_MONTH);
+        month = cl.get(Calendar.MONTH)+1;
+        year = cl.get(Calendar.YEAR);
+
+
         rName = rname.getText().toString();
         if(res_time!=null){
             rdate.setText(now);
             rtime.setText(res_time);
+
         }
 
         if(waittime!=null) {
             rdate.setText(now);
-            rtime.setText(res_time);
             timer = Integer.parseInt(waittime);
+            cl.set(Calendar.MINUTE, cl.get(Calendar.MINUTE) + timer);
+
         }
+
+        hour = cl.get(Calendar.HOUR_OF_DAY);
+        minute = cl.get(Calendar.MINUTE);
+        rtime.setText(hour + ":" + minute);
+        rdate.setText(month + "-" + day + "-" + year);
+
+
 
         layout_timer = (LinearLayout) findViewById(R.id.layout_timer);
         layout_timer.setVisibility(View.GONE);
@@ -466,7 +481,7 @@ public class MakeReservation extends AppCompatActivity implements NavigationView
         this.year = year;
         this.month = month;
         this.day = day;
-        rdate.setText(month + "-" + day + "-" + year);
+        rdate.setText(month+1 + "-" + day + "-" + year);
     }
 
 

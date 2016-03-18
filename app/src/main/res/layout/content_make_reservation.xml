@@ -31,7 +31,9 @@
                 android:layout_marginTop="10dp"
                 android:background="@color/colorWhite"
                 android:orientation="vertical"
-                android:padding="10dp">
+                android:paddingTop="10dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -48,7 +50,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="00:00:00"
-                    android:textColor="@color/colorAccent"
+                    android:textColor="@color/colorPrimaryDark"
                     android:textSize="20dp" />
 
             </LinearLayout>
@@ -235,7 +237,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:ems="8"
+                        android:ems="7"
                         android:enabled="false"
                         android:hint="Enter code here"
                         android:inputType="number"

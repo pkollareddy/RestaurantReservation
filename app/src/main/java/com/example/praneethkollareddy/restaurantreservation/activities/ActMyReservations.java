@@ -1,5 +1,8 @@
 package com.example.praneethkollareddy.restaurantreservation.activities;
 
+import android.app.Activity;
+import android.app.DialogFragment;
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -11,6 +14,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -23,19 +27,18 @@ import android.widget.Toast;
 import com.example.praneethkollareddy.restaurantreservation.R;
 import com.example.praneethkollareddy.restaurantreservation.databeans.Reservation;
 import com.example.praneethkollareddy.restaurantreservation.adapters.ReservationListAdapter;
+import com.example.praneethkollareddy.restaurantreservation.fragments.FragmentReservationOptions;
+import com.example.praneethkollareddy.restaurantreservation.fragments.FragmentReservationOptions2;
+import com.example.praneethkollareddy.restaurantreservation.fragments.ReservationTimePickerFragment;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
-import com.firebase.client.ValueEventListener;
-import com.example.praneethkollareddy.restaurantreservation.adapters.ReservationListAdapter;
-import com.firebase.client.DataSnapshot;
-import com.firebase.client.Firebase;
-import com.firebase.client.FirebaseError;
+import com.firebase.client.Query;
 import com.firebase.client.ValueEventListener;
 
+
 import java.util.ArrayList;
-import java.util.List;
-import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class ActMyReservations extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -54,11 +57,39 @@ public class ActMyReservations extends AppCompatActivity implements NavigationVi
 
         //map elements
         final ListView displayList = (ListView) findViewById(R.id.reservation_list);
-
+        final Calendar cl = Calendar.getInstance();
         reservationList = queryReservations();
         System.out.println(reservationList.size());
         adapter = new ReservationListAdapter(ActMyReservations.this, R.layout.reservation_list, reservationList);
         displayList.setAdapter(adapter);
+
+        displayList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+                                                   @Override
+                                                   public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+
+
+                                                       TextView rDay = (TextView) view.findViewById(R.id.text_rsvDay);
+                                                       int day = cl.get(Calendar.DAY_OF_MONTH);
+                                                       if (day > Integer.parseInt(rDay.getText().toString())) {
+                                                           FragmentManager fm = getFragmentManager();
+                                                           DialogFragment newFragment = new FragmentReservationOptions2();
+                                                           newFragment.show(fm, "options2");
+
+                                                       } else {
+
+
+                                                           FragmentManager fm1 = getFragmentManager();
+                                                           DialogFragment newFragment = new FragmentReservationOptions();
+                                                           newFragment.show(fm1, "options1");
+                                                       }
+
+
+                                                       return false;
+                                                   }
+                                               }
+
+        );
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -74,21 +105,18 @@ public class ActMyReservations extends AppCompatActivity implements NavigationVi
 
     protected List<Reservation> queryReservations() {
         myFirebaseRef = new Firebase("https://resplendent-heat-2353.firebaseio.com");
-        Firebase refReservations = myFirebaseRef.child("Reservations");
+        final Firebase refReservations =  myFirebaseRef.child("Reservations");
+        Query q = refReservations.orderByChild("day");
+
         reservationList = new ArrayList<>();
         final long phone;
-//        if (phoneInput.getText().toString().isEmpty()) {
-//            Toast.makeText(getApplicationContext(), "Please enter a number.", Toast.LENGTH_SHORT).show();
-//            return reservationList;
-//        } else {
-//            phone = Long.parseLong(phoneInput.getText().toString());
-//        }
 
         phone = Long.parseLong(Main_Activity.phone);
-        refReservations.addValueEventListener(new ValueEventListener() {
+        q.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
                 System.out.println("There are " + snapshot.getChildrenCount() + " reservations");
+
                 for (DataSnapshot postSnapshot : snapshot.getChildren()) {
                     Reservation reservation = postSnapshot.getValue(Reservation.class);
                     if (!reservation.getPhone().isEmpty()) {
@@ -182,4 +210,6 @@ public class ActMyReservations extends AppCompatActivity implements NavigationVi
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+
 }

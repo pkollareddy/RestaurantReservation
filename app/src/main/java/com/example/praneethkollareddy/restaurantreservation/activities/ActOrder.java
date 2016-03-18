@@ -199,7 +199,7 @@ public class ActOrder extends AppCompatActivity implements NavigationView.OnNavi
                         parent.getAdapter().getView(position, view, viewGroup).setBackgroundColor(Color.TRANSPARENT);
                         items[myBundle.getInt(ARG_SECTION_NUMBER)-1][position] = 0;
                     } else {
-                        parent.getAdapter().getView(position, view, viewGroup).setBackgroundColor(Color.GREEN);
+                        parent.getAdapter().getView(position, view, viewGroup).setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
                         items[myBundle.getInt(ARG_SECTION_NUMBER)-1][position] = 1;
                     }
                 }

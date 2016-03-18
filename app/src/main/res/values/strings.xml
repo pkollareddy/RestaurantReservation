@@ -40,8 +40,10 @@ Reserve has access to great tables because we give our restaurant partners peace
     <string name="ok">OK</string>
     <string name="facebook_app_id">1581720592145936</string>
     <string name="cart_title">These items are in your cart.</string>
-    <string name="non_veg">Non Vegetarian Options</string>
-    <string name="veg">Vegetarian Options</string>
+
+
+    <string name="non_veg">Meat</string>
+    <string name="veg">Vegetarian</string>
     <string name="drink">Drinks</string>
 
 

@@ -40,8 +40,8 @@ import java.util.List;
 
 public class ReservationListAdapter extends ArrayAdapter<Reservation> {
     private final List<Reservation> reservationList;
-    String rMonth,rTime, rName, rDate, rResName, rParty, rShare, rGenTime;
-
+    String rMonth,rTime, rName, rDate, rResName, rParty, rGenTime;
+    public static String rShare;
 
     public static class ViewHolder {
         public TextView rsvMonth,partySize, genTime, resName, rsvName, rsvDate, rsvTime, viewInvoice, cancellationPolicy, changeRsv, cancelRsv, orderFood, writeReview, share;

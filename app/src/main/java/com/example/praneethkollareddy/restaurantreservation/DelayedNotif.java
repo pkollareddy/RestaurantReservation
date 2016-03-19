@@ -11,6 +11,7 @@ import android.graphics.Color;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
+import android.widget.Toast;
 
 import com.example.praneethkollareddy.restaurantreservation.activities.ActMyReservations;
 import com.example.praneethkollareddy.restaurantreservation.activities.Main_Activity;
@@ -24,14 +25,15 @@ public class DelayedNotif extends BroadcastReceiver {
 
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(
                 context).setSmallIcon(R.drawable.logo)
-                .setContentTitle("Restaurant Reservation")
+                .setContentTitle("ReRe")
                 .setContentText("Don't forget that you have a reservation today!");
-        Intent notificationIntent = new Intent(context, MapsActivity.class);
+
+        Intent notificationIntent = new Intent(context.getApplicationContext(), MapsActivity.class);
         notificationIntent.putExtra("latitude", Main_Activity.Latitude);
         notificationIntent.putExtra("longitude", Main_Activity.Longitude);
 
 
-        PendingIntent contentIntent = PendingIntent.getActivity(context, 0, notificationIntent,
+        PendingIntent contentIntent = PendingIntent.getActivity(context.getApplicationContext(), 0, notificationIntent,
                 PendingIntent.FLAG_UPDATE_CURRENT);
 
         mBuilder.setContentIntent(contentIntent);

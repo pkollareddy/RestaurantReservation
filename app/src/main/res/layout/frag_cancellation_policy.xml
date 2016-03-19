@@ -3,8 +3,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:minHeight="400dp"
-    android:padding="5dp">
+    android:minHeight="250dp"
+    android:padding="10dp">
 
     <TextView
         android:layout_width="match_parent"
@@ -14,7 +14,8 @@
         android:textStyle="bold"/>
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp">
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

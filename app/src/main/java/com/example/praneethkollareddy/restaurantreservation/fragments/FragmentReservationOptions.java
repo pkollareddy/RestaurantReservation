@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 
 import com.example.praneethkollareddy.restaurantreservation.R;
+import com.example.praneethkollareddy.restaurantreservation.adapters.ReservationListAdapter;
 
 import java.io.File;
 import java.io.IOException;
@@ -43,49 +44,14 @@ public class FragmentReservationOptions extends DialogFragment {
                         break;
                     case 1:
                         FragmentManager fm2 = getFragmentManager();
-                        DialogFragment cancelFrag = new FragmentCancellationPolicy();
+                        DialogFragment cancelFrag = new FragmentCancelReservation();
                         cancelFrag.show(fm2, "cancel");
 
                         break;
                     case 2:
-                        AssetManager assetManager = getActivity().getAssets();
-
-                        InputStream in = null;
-                        OutputStream out = null;
-                        File file = new File(getActivity().getFilesDir(), "invoice.pdf");
-                        try {
-                            in = assetManager.open("invoice.pdf");
-                            out = getActivity().openFileOutput(file.getName(), Context.MODE_WORLD_READABLE);
-
-                            copyFile(in, out);
-                            in.close();
-                            in = null;
-                            out.flush();
-                            out.close();
-                            out = null;
-                        } catch (Exception e) {
-                            Log.e("tag", e.getMessage());
-                        }
-
-                        Intent intent = new Intent(Intent.ACTION_VIEW);
-                        intent.setDataAndType(
-                                Uri.parse("file://" + getActivity().getFilesDir() + "/invoice.pdf"),
-                                "application/pdf");
-
-                        getActivity().startActivity(intent);
-
-                        break;
-
-                    case 3:
-                        FragmentManager fm3 = getFragmentManager();
-                        DialogFragment newFragment = new FragmentWriteReview();
-                        newFragment.show(fm3, "review");
-                        break;
-
-                    case 4:
                         Intent sendIntent = new Intent();
                         sendIntent.setAction(Intent.ACTION_SEND);
-                        sendIntent.putExtra(Intent.EXTRA_TEXT, "Text");
+                        sendIntent.putExtra(Intent.EXTRA_TEXT, ReservationListAdapter.rShare);
                         sendIntent.setType("text/plain");
                         getActivity().startActivity(sendIntent);
                         break;

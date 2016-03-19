@@ -7,15 +7,14 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.praneethkollareddy.restaurantreservation.activities.LoadingPage"
-    android:background="@color/colorWhite">
+    tools:context="com.example.praneethkollareddy.restaurantreservation.LoginActivity">
 
-    <ImageView
-        android:layout_width="150dp"
+    <com.facebook.login.widget.LoginButton
+        android:id="@+id/login_button"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/full_logo"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"/>
-
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="30dp" />
 
 </RelativeLayout>

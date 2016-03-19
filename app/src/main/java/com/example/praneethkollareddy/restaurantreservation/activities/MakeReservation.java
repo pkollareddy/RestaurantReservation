@@ -299,8 +299,8 @@ public class MakeReservation extends AppCompatActivity implements NavigationView
                 int id = 12345;
 
                 Notification.Builder notification = new Notification.Builder(MakeReservation.this)
-                        .setContentTitle("Restaurant Reservation")
-                        .setContentText("Your reservation at " + res_name + " for " + party + "has been made.")
+                        .setContentTitle("ReRe")
+                        .setContentText("Reservation at " + res_name + " confirmed")
                         .setSmallIcon(R.drawable.logo);
 
                 Intent notificationIntent = new Intent(getApplicationContext(), ActMyReservations.class);
@@ -326,10 +326,12 @@ public class MakeReservation extends AppCompatActivity implements NavigationView
 
                 Calendar calendar = Calendar.getInstance();
                 calendar.set(Calendar.YEAR, year);
-                calendar.set(Calendar.MONTH, month);
+                calendar.set(Calendar.MONTH, month-1);
                 calendar.set(Calendar.DAY_OF_MONTH, day);
                 calendar.set(Calendar.HOUR_OF_DAY, hour - 2);
                 calendar.set(Calendar.MINUTE, minute);
+
+                System.out.println(calendar.getTime());
 
                 System.out.println("sound the alarm");
                 alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);

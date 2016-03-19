@@ -47,7 +47,6 @@ Reserve has access to great tables because we give our restaurant partners peace
     <string name="drink">Drinks</string>
 
 
-
     <string-array name="menuList">
         <item>Item 1</item>
         <item>Item 2</item>
@@ -68,7 +67,6 @@ Reserve has access to great tables because we give our restaurant partners peace
         <item>Write a review</item>
         <item>Share</item>
     </string-array>
-
 
 
 </resources>

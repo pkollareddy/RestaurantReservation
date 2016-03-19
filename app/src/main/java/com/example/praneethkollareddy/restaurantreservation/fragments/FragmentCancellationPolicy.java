@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
+import android.widget.Toast;
 
 import com.example.praneethkollareddy.restaurantreservation.R;
 
@@ -23,6 +24,7 @@ public class FragmentCancellationPolicy extends DialogFragment{
                 .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         // FIRE ZE MISSILES!
+                        Toast.makeText(getActivity(),"Cancellation request sent", Toast.LENGTH_SHORT).show();
                     }
                 });
         // Create the AlertDialog object and return it

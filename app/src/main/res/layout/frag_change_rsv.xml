@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    android:gravity="center">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -14,36 +16,24 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="20dp"
-            android:text="Month"/>
+            android:text="Day"
+            android:gravity="center"
+            android:layout_weight="1" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="20dp"
-            android:layout_marginLeft="20dp"
-            android:text="Day"/>
+            android:text="Month"
+            android:gravity="center"
+            android:layout_weight="1" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="20dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
+            android:text="Year"
+            android:layout_weight="1"
+            android:gravity="center" />
 
-            android:text="Year"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="20dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="10dp"
-
-            android:text="Hour"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="20dp"
-            android:layout_marginLeft="20dp"
-
-            android:text="Min"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -53,41 +43,84 @@
         android:gravity="center">
         <NumberPicker
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:id="@+id/picker_day"/>
+            android:layout_height="60dp"
+            android:id="@+id/picker_day"
+            android:layout_weight="1" />
         <NumberPicker
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:id="@+id/picker_month"/>
+            android:id="@+id/picker_month"
+            android:layout_weight="1" />
         <NumberPicker
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:id="@+id/picker_year"/>
-        <NumberPicker
+            android:id="@+id/picker_year"
+            android:layout_weight="1" />
+
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="15dp"
+        >
+
+        <TextView
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="15dp"
-            android:id="@+id/picker_hour"/>
-        <NumberPicker
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+
+            android:text="Hour"
+            android:layout_weight="1"
+            android:gravity="center" />
+        <TextView
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:id="@+id/picker_min"/>
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+
+            android:text="Min"
+            android:layout_weight="1"
+            android:gravity="center" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+android:layout_marginLeft="15dp"
+            android:text="Table for"
+            android:layout_weight="2"
+            android:gravity="center" />
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:layout_gravity="center"
         android:gravity="center">
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Cancel"/>
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Change"/>
 
+        <NumberPicker
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:id="@+id/picker_hour"
+            android:layout_weight="1" />
+        <NumberPicker
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/picker_min"
+            android:layout_weight="1" />
+        <NumberPicker
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/picker_party"
+            android:layout_marginLeft="15dp"
+
+            android:layout_weight="2" />
     </LinearLayout>
+
 
 
 

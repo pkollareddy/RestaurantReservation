@@ -28,7 +28,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:fitsSystemWindows="true"
+                android:background="@drawable/res_details"
                 app:contentScrim="?attr/colorPrimary"
+
                 app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
                 <android.support.v7.widget.Toolbar
@@ -36,7 +38,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
                     app:layout_collapseMode="pin"
-                    app:popupTheme="@style/AppTheme.PopupOverlay" />
+                    app:popupTheme="@style/AppTheme.PopupOverlay" >
+
+
+                </android.support.v7.widget.Toolbar>
 
             </android.support.design.widget.CollapsingToolbarLayout>
         </android.support.design.widget.AppBarLayout>

@@ -2,12 +2,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center">
+    android:gravity="center"
+    android:padding="10dp">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Rate our restaurant"/>
+        android:text="Rate our restaurant"
+        android:textColor="@color/colorPrimaryDark"/>
 
     <RatingBar
         android:layout_width="wrap_content"
@@ -16,7 +18,8 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Write a review"/>
+        android:text="Write a review"
+        android:textColor="@color/colorPrimaryDark"/>
     <EditText
         android:layout_width="200dp"
         android:layout_height="100dp" />

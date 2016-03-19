@@ -32,7 +32,7 @@
         <activity
             android:name=".activities.Main_Activity"
             android:label="@string/title_activity_main_"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activities.AddRes"
             android:label="@string/title_add_res"
@@ -94,7 +94,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.MyCart"></activity>
+        <activity android:name=".activities.MyCart" />
+
     </application>
 
 </manifest>

@@ -2,6 +2,7 @@ package com.example.praneethkollareddy.restaurantreservation.fragments;
 
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.app.FragmentManager;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
@@ -28,6 +29,10 @@ public class FragmentCancelReservation extends DialogFragment {
                 })
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
+                        FragmentManager fm2 = getFragmentManager();
+                        DialogFragment cancelFrag = new FragmentCancellationPolicy();
+                        cancelFrag.show(fm2, "cancellation policy");
+
                         Toast.makeText(getActivity(), "I don't think so", Toast.LENGTH_SHORT).show();
                     }
                 });

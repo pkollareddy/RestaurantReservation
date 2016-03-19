@@ -18,19 +18,18 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:background="@color/colorWhite"
+            android:background="@color/colorPrimaryDark"
             android:gravity="center_horizontal"
             android:orientation="horizontal"
-            android:padding="10dp"
-            android:weightSum="1">
+            android:weightSum="1"
+            android:layout_gravity="center">
 
             <Button
 
                 android:id="@+id/btn_makeReservation"
                 android:layout_width="80dp"
                 android:layout_height="30dp"
-                android:layout_weight="0.15"
+                android:layout_weight=".40"
                 android:background="@color/colorPrimaryDark"
                 android:focusable="false"
                 android:focusableInTouchMode="false"
@@ -39,13 +38,16 @@
                 android:text="Reserve"
                 android:textColor="@color/colorWhite"
                 android:textSize="12dp" />
+            <TextView
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/colorWhite"/>
 
             <Button
                 android:id="@+id/btn_orderFood"
                 android:layout_width="80dp"
                 android:layout_height="30dp"
-                android:layout_marginLeft="10dp"
-                android:layout_weight="0.15"
+                android:layout_weight=".40"
                 android:background="@color/colorPrimaryDark"
                 android:focusable="false"
                 android:focusableInTouchMode="false"
@@ -53,7 +55,8 @@
                 android:stateListAnimator="@null"
                 android:text="Menu"
                 android:textColor="@color/colorWhite"
-                android:textSize="12dp" />
+                android:textSize="12dp"
+                android:layout_gravity="right" />
 
 
         </LinearLayout>
